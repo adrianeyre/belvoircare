@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b4fb0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a1626" media="(prefers-color-scheme: dark)" />
+
+  <title>BelvoirCare Ltd — Bespoke Event Medical Cover Across the UK</title>
+  <meta name="description" content="BelvoirCare Ltd provides bespoke event medical cover across the UK since 2009 — festivals, sporting tournaments and village fetes. Qualified medics, rapid response vehicles and full treatment facilities. Book your event cover today." />
+  <meta name="keywords" content="Event Medical Services, BelvoirCare Ltd, Event Medical Cover, First Aid Cover, Festival Medics, Ambulance Cover, Rapid Response, UK" />
+  <link rel="canonical" href="https://belvoircare.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="BelvoirCare Ltd — Bespoke Event Medical Cover" />
+  <meta property="og:description" content="Reliable, professional medical cover for events of any size across the UK. Trusted since 2009." />
+  <meta property="og:url" content="https://belvoircare.com/" />
+
+  <!-- Prevent theme flash: set theme before paint -->
+  <script>
+    (function () {
+      try {
+        var pref = localStorage.getItem('bc-theme') || 'system';
+        var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var resolved = pref === 'system' ? (sysDark ? 'dark' : 'light') : pref;
+        document.documentElement.setAttribute('data-theme', resolved);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "BelvoirCare Ltd",
+    "description": "Bespoke event medical cover across the UK since 2009.",
+    "url": "https://belvoircare.com/",
+    "telephone": "+447724026520",
+    "email": "events@belvoircare.com",
+    "areaServed": "United Kingdom",
+    "foundingDate": "2009",
+    "openingHours": "Mo-Su 00:00-23:59",
+    "sameAs": [
+      "https://www.facebook.com/BelvoirCareLTD",
+      "https://instagram.com/belvoircareltd"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ============ HEADER / NAV ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="BelvoirCare Ltd — home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+            <path class="brand-pulse" d="M1 12h4l2-6 4 12 3-9 2 3h7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">Belvoir<strong>Care</strong></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#shrimpy">Shrimpy</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme" title="Theme: System">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-system" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </button>
+
+        <a href="#contact" class="btn btn-accent btn-sm nav-cta">Book Cover</a>
+
+        <button id="menuToggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-glow glow-1"></div>
+        <div class="hero-glow glow-2"></div>
+        <svg class="hero-ekg" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,100 L300,100 L330,100 L350,40 L380,160 L410,70 L430,100 L700,100 L730,100 L750,55 L780,150 L805,80 L825,100 L1200,100"
+                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="container hero-inner">
+        <p class="eyebrow reveal" data-reveal>
+          <span class="dot-pulse" aria-hidden="true"></span>
+          Trusted UK event medics since 2009
+        </p>
+        <h1 class="hero-title reveal" data-reveal data-reveal-delay="1">
+          Bespoke <span class="grad-text">event medical cover</span><br />for events of any size
+        </h1>
+        <p class="hero-sub reveal" data-reveal data-reveal-delay="2">
+          From music festivals and sporting tournaments to village fetes — reliable, professional
+          medical assistance is always at hand. We plan with organisers and local authorities so
+          your attendees are safe, every step of the way.
+        </p>
+        <div class="hero-cta reveal" data-reveal data-reveal-delay="3">
+          <a href="#contact" class="btn btn-accent btn-lg">Book your event cover</a>
+          <a href="tel:07724026520" class="btn btn-ghost btn-lg">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+            07724 026520
+          </a>
+        </div>
+
+        <div class="trust-badges reveal" data-reveal data-reveal-delay="4">
+          <span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> ICO registered</span>
+          <span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Purple Guide aligned</span>
+          <span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M9 21v-5l3 2 3-2v5"/></svg> Nationally qualified medics</span>
+          <span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 24/7 &amp; overnight cover</span>
+        </div>
+      </div>
+
+      <div class="hero-stats container">
+        <div class="stat reveal" data-reveal>
+          <span class="stat-num" data-count="2009" data-suffix="" data-plain="true">2009</span>
+          <span class="stat-label">Caring since</span>
+        </div>
+        <div class="stat reveal" data-reveal data-reveal-delay="1">
+          <span class="stat-num" data-count="500" data-suffix="+">0</span>
+          <span class="stat-label">Events covered</span>
+        </div>
+        <div class="stat reveal" data-reveal data-reveal-delay="2">
+          <span class="stat-num" data-count="100" data-suffix="%">0</span>
+          <span class="stat-label">Qualified team</span>
+        </div>
+        <div class="stat reveal" data-reveal data-reveal-delay="3">
+          <span class="stat-num" data-count="7" data-suffix="" data-prefix="">0</span>
+          <span class="stat-label">Vehicle types</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="container two-col">
+        <div class="col-text">
+          <p class="section-kicker reveal" data-reveal>About us</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">Professional medical assistance, whatever the event</h2>
+          <p class="lead reveal" data-reveal data-reveal-delay="2">
+            Our expertise ensures that no matter the size or type of event, reliable and professional
+            medical assistance will always be at hand.
+          </p>
+          <p class="reveal" data-reveal data-reveal-delay="3">
+            We work closely with event organisers and local authorities to understand the specific
+            needs of each event, delivering the well-being of attendees through meticulous planning.
+            Organisers can be assured they will have all the necessary medical provisions on site to
+            cover a wide range of medical incidents.
+          </p>
+          <ul class="check-list reveal" data-reveal data-reveal-delay="4">
+            <li>Tailored medical plans for events of every scale</li>
+            <li>Close coordination with organisers &amp; authorities</li>
+            <li>Highly trained, nationally qualified professionals</li>
+            <li>Overnight medical support available</li>
+          </ul>
+        </div>
+        <div class="col-media reveal" data-reveal data-reveal-delay="2">
+          <div class="feature-card glass">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v1h2a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h2V5a3 3 0 0 1 3-3z"/><path d="M12 11v4M10 13h4"/></svg>
+            </div>
+            <h3>Meticulous event planning</h3>
+            <p>Risk assessments, staffing ratios and on-site provisions matched precisely to your event profile.</p>
+            <div class="mini-stats">
+              <div><strong>UK-wide</strong><span>coverage</span></div>
+              <div><strong>Any scale</strong><span>festival to fete</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-kicker reveal" data-reveal>What we cover</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">Comprehensive event medical services</h2>
+          <p class="section-intro reveal" data-reveal data-reveal-delay="2">A complete medical operation for your event — staff, vehicles and full treatment facilities, all in one place.</p>
+        </div>
+
+        <div class="card-grid">
+          <article class="card reveal" data-reveal>
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <h3>Festivals &amp; concerts</h3>
+            <p>Crowd-aware medical teams for music festivals and large gatherings, scaled to attendance.</p>
+          </article>
+          <article class="card reveal" data-reveal data-reveal-delay="1">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18M3 12h18"/></svg></div>
+            <h3>Sporting tournaments</h3>
+            <p>Pitch-side and trackside cover with rapid response for competitors and spectators alike.</p>
+          </article>
+          <article class="card reveal" data-reveal data-reveal-delay="2">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div>
+            <h3>Village fetes &amp; community</h3>
+            <p>Friendly, proportionate cover for community events, fairs and local gatherings.</p>
+          </article>
+          <article class="card reveal" data-reveal data-reveal-delay="3">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M9 21v-5l3 2 3-2v5"/></svg></div>
+            <h3>Qualified medical staff</h3>
+            <p>Nationally recognised qualifications, ready to respond swiftly to any situation.</p>
+          </article>
+          <article class="card reveal" data-reveal data-reveal-delay="4">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <h3>Overnight support</h3>
+            <p>Round-the-clock medical presence for multi-day and camping events.</p>
+          </article>
+          <article class="card reveal" data-reveal data-reveal-delay="5">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 22h10M12 8v4M10 10h4"/></svg></div>
+            <h3>On-site treatment rooms</h3>
+            <p>We transform any indoor space into a fully functioning multi-patient treatment facility.</p>
+          </article>
+        </div>
+
+        <div class="equip reveal" data-reveal>
+          <h3 class="equip-title">Treatment facility equipment we supply</h3>
+          <ul class="tag-list">
+            <li>Room dividers</li><li>Treatment beds</li><li>Patient monitors</li>
+            <li>Portable sinks</li><li>Tables &amp; chairs</li><li>Shelving</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FLEET ============ -->
+    <section class="section" id="fleet">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-kicker reveal" data-reveal>Support vehicles</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">A fleet ready for any scenario</h2>
+          <p class="section-intro reveal" data-reveal data-reveal-delay="2">BelvoirCare can provide a wide range of support vehicles, matched to your site and risk profile.</p>
+        </div>
+
+        <div class="fleet-grid">
+          <div class="fleet-item reveal" data-reveal><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V7h11v10M14 10h4l3 3v4h-7"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></span> Unmarked vehicles</div>
+          <div class="fleet-item reveal" data-reveal data-reveal-delay="1"><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V8h12v9M15 11h3l3 3v3h-6"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/><path d="M8 6V3M6.5 4.5h3"/></svg></span> Rapid Response Vehicles</div>
+          <div class="fleet-item reveal" data-reveal data-reveal-delay="2"><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17V7h13v10M15 11h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/><path d="M9 5v3M7.5 6.5h3"/></svg></span> Emergency Ambulance</div>
+          <div class="fleet-item reveal" data-reveal data-reveal-delay="3"><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M5.5 17.5 9 9h4l3 4.5M9 9 7 6h3"/></svg></span> Cycle Response Unit</div>
+          <div class="fleet-item reveal" data-reveal data-reveal-delay="4"><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="14" height="10" rx="1"/><path d="M16 11h3l3 3v3h-6"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></span> Mobile treatment vehicle</div>
+          <div class="fleet-item reveal" data-reveal data-reveal-delay="5"><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="16" height="11" rx="1"/><path d="M18 17h4M20 15v4"/><circle cx="7" cy="17.5" r="1.5"/><circle cx="13" cy="17.5" r="1.5"/></svg></span> Large treatment trailers</div>
+          <div class="fleet-item reveal" data-reveal data-reveal-delay="6"><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span> See &amp; treat vehicles</div>
+          <div class="fleet-item fleet-cta reveal" data-reveal data-reveal-delay="7"><a href="#contact">Discuss your site needs <span aria-hidden="true">&rarr;</span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHRIMPY ============ -->
+    <section class="section section-shrimpy" id="shrimpy">
+      <div class="container two-col reverse">
+        <div class="col-text">
+          <p class="section-kicker reveal" data-reveal>Meet Shrimpy</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">A friendly face when it matters most</h2>
+          <p class="lead reveal" data-reveal data-reveal-delay="2">
+            Shrimpy is BelvoirCare's mascot. He travels around our events, providing additional
+            support and reassurance for those who find receiving medical care worrying.
+          </p>
+          <p class="reveal" data-reveal data-reveal-delay="3">
+            Friendly, calming and always ready with a smile — Shrimpy has provided comfort and
+            support for <strong>hundreds of adults and children</strong>.
+          </p>
+        </div>
+        <div class="col-media reveal" data-reveal data-reveal-delay="2">
+          <div class="shrimpy-stage">
+            <div class="shrimpy-ring" aria-hidden="true"></div>
+            <svg class="shrimpy" viewBox="0 0 220 200" role="img" aria-label="Shrimpy, BelvoirCare's friendly shrimp mascot">
+              <g class="shrimpy-float">
+                <path d="M150 60c34 6 52 34 46 70-5 30-30 52-66 52-46 0-78-34-78-78 0-10 2-19 6-27" fill="#ff7a59"/>
+                <path d="M150 60c34 6 52 34 46 70-5 30-30 52-66 52" fill="none" stroke="#e85c3a" stroke-width="3" opacity=".5"/>
+                <path d="M58 96c-18-6-34 2-44 18M62 110c-20-2-36 8-42 26M70 124c-18 2-30 14-34 32" fill="none" stroke="#ff7a59" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="150" cy="92" r="34" fill="#ff8f6b"/>
+                <path d="M150 58c14 0 26 8 32 20" fill="none" stroke="#ff7a59" stroke-width="6" stroke-linecap="round"/>
+                <path d="M168 60c6-10 16-14 26-12M176 66c8-6 18-6 26 0" fill="none" stroke="#ff7a59" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="142" cy="86" r="6" fill="#1d2b3a"/><circle cx="144" cy="84" r="2" fill="#fff"/>
+                <circle cx="164" cy="86" r="6" fill="#1d2b3a"/><circle cx="166" cy="84" r="2" fill="#fff"/>
+                <path d="M140 102c6 6 18 6 24 0" fill="none" stroke="#1d2b3a" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="132" cy="98" r="5" fill="#ff6b8a" opacity=".55"/>
+                <circle cx="174" cy="98" r="5" fill="#ff6b8a" opacity=".55"/>
+                <g class="shrimpy-cross"><rect x="96" y="118" width="34" height="34" rx="7" fill="#fff" stroke="#0b4fb0" stroke-width="2"/><path d="M113 124v22M102 135h22" stroke="#e11d2a" stroke-width="6" stroke-linecap="round"/></g>
+              </g>
+            </svg>
+            <p class="shrimpy-cap">Say hello to Shrimpy at your next event!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOOKING STEPS ============ -->
+    <section class="section section-alt" id="booking">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-kicker reveal" data-reveal>Booking made easy</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">Three simple steps to cover</h2>
+          <p class="section-intro reveal" data-reveal data-reveal-delay="2">Bookings can be made via phone, WhatsApp, social media or email.</p>
+        </div>
+        <ol class="steps">
+          <li class="step reveal" data-reveal>
+            <span class="step-num">1</span>
+            <h3>Get in touch</h3>
+            <p>Call, message or email us with your enquiry — whichever suits you best.</p>
+          </li>
+          <li class="step reveal" data-reveal data-reveal-delay="1">
+            <span class="step-num">2</span>
+            <h3>Share your event details</h3>
+            <p>Tell us the date(s), start &amp; finish times, type of event and medical staff required.</p>
+          </li>
+          <li class="step reveal" data-reveal data-reveal-delay="2">
+            <span class="step-num">3</span>
+            <h3>We handle the rest</h3>
+            <p>Our staff ensure a seamless booking process, prioritising your event's medical needs.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ COMPLIANCE ============ -->
+    <section class="section" id="compliance">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-kicker reveal" data-reveal>Compliance &amp; safety</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">Safety and confidentiality, built in</h2>
+        </div>
+        <div class="card-grid compliance-grid">
+          <article class="card reveal" data-reveal>
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <h3>ICO registered</h3>
+            <p>Registered with the Information Commissioner's Office. We follow strict guidance when collecting and storing confidential information, and are committed to protecting your data privacy at all times.</p>
+          </article>
+          <article class="card reveal" data-reveal data-reveal-delay="1">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <h3>The Purple Guide</h3>
+            <p>We take guidance from The Purple Guide to ensure safe practices during events and gatherings, prioritising both compliance and safety.</p>
+          </article>
+          <article class="card reveal" data-reveal data-reveal-delay="2">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M9 21v-5l3 2 3-2v5"/></svg></div>
+            <h3>Qualified professionals</h3>
+            <p>Our team of highly trained professionals hold nationally recognised medical qualifications and are ready to respond swiftly to any situation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section section-alt" id="testimonials">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-kicker reveal" data-reveal>Testimonials</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">What event organisers say</h2>
+        </div>
+        <div class="quote-grid">
+          <figure class="quote reveal" data-reveal>
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>"Professional and reliable service, perfect for all types of events."</blockquote>
+            <figcaption>Event Organiser</figcaption>
+          </figure>
+          <figure class="quote reveal" data-reveal data-reveal-delay="1">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>"Their mascot, Shrimpy, adds a comforting presence during medical emergencies."</blockquote>
+            <figcaption>Festival Coordinator</figcaption>
+          </figure>
+          <figure class="quote reveal" data-reveal data-reveal-delay="2">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>"Easy booking process and quick response from friendly staff."</blockquote>
+            <figcaption>Community Event Lead</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact">
+      <div class="container contact-wrap">
+        <div class="contact-info">
+          <p class="section-kicker reveal" data-reveal>Contact us</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">Let's cover your event</h2>
+          <p class="section-intro reveal" data-reveal data-reveal-delay="2">Get in touch and our team will help plan the right medical provision for your event.</p>
+
+          <ul class="contact-list reveal" data-reveal data-reveal-delay="3">
+            <li>
+              <span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></span>
+              <div><span class="ci-label">Phone</span><a href="tel:07724026520">07724 026520</a></div>
+            </li>
+            <li>
+              <span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-1.2 4.3 8.5 8.5 0 0 1-7.3 4.2 8.4 8.4 0 0 1-4-1L3 21l1.9-5.5a8.4 8.4 0 0 1-1-4A8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5z"/></svg></span>
+              <div><span class="ci-label">WhatsApp</span><a href="https://wa.me/447724026520" target="_blank" rel="noopener">Message us on WhatsApp</a></div>
+            </li>
+            <li>
+              <span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+              <div><span class="ci-label">Email</span><a href="mailto:events@belvoircare.com">events@belvoircare.com</a></div>
+            </li>
+            <li>
+              <span class="ci" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+              <div><span class="ci-label">Open hours</span><span class="ci-static">Open 24 hours, every day</span></div>
+            </li>
+          </ul>
+
+          <div class="social reveal" data-reveal data-reveal-delay="4">
+            <a href="https://www.facebook.com/BelvoirCareLTD" target="_blank" rel="noopener" aria-label="BelvoirCare on Facebook" class="social-btn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+            </a>
+            <a href="https://instagram.com/belvoircareltd" target="_blank" rel="noopener" aria-label="BelvoirCare on Instagram" class="social-btn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" data-reveal data-reveal-delay="2" id="bookingForm" novalidate>
+          <h3>Request event cover</h3>
+          <div class="field">
+            <label for="name">Your name <span class="req" aria-hidden="true">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+            <p class="error" data-error-for="name"></p>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <p class="error" data-error-for="email"></p>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="eventType">Event type</label>
+              <input id="eventType" name="eventType" type="text" placeholder="e.g. music festival" />
+            </div>
+            <div class="field">
+              <label for="eventDate">Event date(s)</label>
+              <input id="eventDate" name="eventDate" type="text" placeholder="e.g. 12–14 July 2026" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Details <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="4" placeholder="Start/finish times, expected attendance, staff required…" required></textarea>
+            <p class="error" data-error-for="message"></p>
+          </div>
+          <button type="submit" class="btn btn-accent btn-lg form-submit">
+            <span class="btn-label">Send enquiry</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+          <p class="form-note">This opens your email client to send the enquiry to our team. Prefer to talk? Call <a href="tel:07724026520">07724 026520</a>.</p>
+          <p class="form-success" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M1 12h4l2-6 4 12 3-9 2 3h7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="brand-text">Belvoir<strong>Care</strong></span>
+        </span>
+        <p>Bespoke event medical cover across the UK since 2009.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; <span id="year">2026</span> BelvoirCare Ltd. All rights reserved.</p>
+      <p>ICO registered &middot; Aligned with The Purple Guide</p>
+    </div>
+  </footer>
+
+  <a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+  </a>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
