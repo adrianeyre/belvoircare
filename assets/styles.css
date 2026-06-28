@@ -296,6 +296,36 @@ ul, ol { list-style: none; padding: 0; }
 .step h3 { margin: .8rem 0 .5rem; font-size: 1.2rem; }
 .step p { color: var(--text-muted); font-size: .97rem; }
 
+/* Wellbeing */
+.section-wellbeing { background: linear-gradient(180deg, transparent, var(--surface-2)); position: relative; }
+.new-pill { display: inline-block; background: var(--accent); color: #fff; font-size: .68rem; font-weight: 800; letter-spacing: .08em; padding: .15rem .5rem; border-radius: 999px; margin-right: .5rem; vertical-align: middle; }
+.wb-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+.wb-check { display: flex; align-items: flex-start; gap: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; box-shadow: var(--shadow-sm); transition: transform .3s var(--ease-out), box-shadow .3s, border-color .3s; }
+.wb-check:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--blue-300); }
+.wb-ic { flex-shrink: 0; width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue-700), var(--accent)); color: #fff; }
+.wb-check h3 { font-size: 1.1rem; margin-bottom: .2rem; }
+.wb-check p { color: var(--text-muted); font-size: .94rem; }
+
+.wb-journey-title { text-align: center; font-size: clamp(1.3rem, 3vw, 1.7rem); margin-bottom: 2.2rem; }
+.bays { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; position: relative; }
+.bay { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.4rem 1.6rem 1.6rem; box-shadow: var(--shadow-sm); text-align: center; transition: transform .35s var(--ease-out), box-shadow .35s; }
+.bay:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+/* connector arrows between bays (desktop) */
+.bay:not(:last-child)::after { content: ""; position: absolute; top: 50%; right: -1.05rem; width: 1.4rem; height: 1.4rem; transform: translateY(-50%) rotate(45deg); border-top: 3px solid var(--accent); border-right: 3px solid var(--accent); z-index: 2; }
+.bay-tag { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--blue-700), var(--accent)); color: #fff; font-family: var(--font-head); font-weight: 800; font-size: .82rem; letter-spacing: .04em; padding: .35rem 1rem; border-radius: 999px; box-shadow: var(--shadow-md); white-space: nowrap; }
+.bay-ic { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: var(--accent-soft); color: var(--accent); margin-bottom: 1rem; transition: transform .35s var(--ease-spring); }
+.bay:hover .bay-ic { transform: scale(1.08) rotate(-4deg); }
+.bay h4 { font-family: var(--font-head); font-size: 1.2rem; margin-bottom: .5rem; }
+.bay p { color: var(--text-muted); font-size: .95rem; }
+
+.wb-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.4rem 2.2rem; margin-top: clamp(2.5rem, 6vw, 3.5rem); padding: 1.8rem clamp(1.4rem, 4vw, 2.6rem); background: var(--glass-bg); border: 1px solid var(--glass-brd); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); backdrop-filter: blur(10px); }
+.wb-stat { text-align: center; }
+.wb-stat-num { display: block; font-family: var(--font-head); font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.4rem); color: var(--heading); line-height: 1; font-variant-numeric: tabular-nums; }
+.wb-unit { font-size: .9rem; font-weight: 700; color: var(--accent); margin-left: .15rem; }
+.wb-stat-label { display: block; margin-top: .4rem; font-size: .85rem; color: var(--text-muted); }
+.wb-divider { width: 1px; height: 42px; background: var(--border); }
+.wb-cta { margin-left: auto; }
+
 /* Testimonials */
 .quote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.3rem; }
 .quote { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow-sm); transition: transform .35s var(--ease-out), box-shadow .35s; }
@@ -351,7 +381,12 @@ ul, ol { list-style: none; padding: 0; }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
 .footer-nav a { color: var(--text-muted); font-family: var(--font-head); font-weight: 500; }
 .footer-nav a:hover { color: var(--primary); }
-.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: 1.4rem 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .88rem; }
+.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1.4rem; padding: 1.4rem 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .88rem; }
+.footer-meta { display: inline-flex; align-items: center; flex-wrap: wrap; gap: .5rem 1.1rem; }
+.design-credit { display: inline-flex; align-items: center; gap: .45rem; color: var(--text-muted); font-family: var(--font-head); font-weight: 600; padding: .35rem .2rem; border-radius: 8px; transition: color .2s, transform .2s; }
+.design-credit svg { transition: transform .3s var(--ease-spring); }
+.design-credit:hover { color: var(--primary); }
+.design-credit:hover svg { transform: rotate(8deg) scale(1.12); }
 
 /* Back to top */
 .back-to-top { position: fixed; right: 1.4rem; bottom: 1.4rem; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: var(--primary); color: var(--on-primary); box-shadow: var(--shadow-lg); z-index: 90; opacity: 0; visibility: hidden; transform: translateY(14px) scale(.9); transition: opacity .3s, transform .3s var(--ease-spring), visibility .3s; }
@@ -385,6 +420,11 @@ ul, ol { list-style: none; padding: 0; }
   .two-col.reverse .col-media { order: 0; }
   .steps { grid-template-columns: 1fr; gap: 2rem; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+  .bays { grid-template-columns: 1fr; gap: 2.2rem; }
+  /* turn connector arrows downward when stacked */
+  .bay:not(:last-child)::after { top: auto; bottom: -1.55rem; right: 50%; transform: translateX(50%) rotate(135deg); }
+  .wb-divider { display: none; }
+  .wb-cta { margin-left: 0; width: 100%; }
 }
 
 @media (max-width: 760px) {

@@ -17,7 +17,7 @@
   var mql = window.matchMedia('(prefers-color-scheme: dark)');
 
   function getPref() {
-    try { return localStorage.getItem(THEME_KEY) || 'system'; } catch (e) { return 'system'; }
+    try { return localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) { return 'dark'; }
   }
   function resolve(pref) {
     return pref === 'system' ? (mql.matches ? 'dark' : 'light') : pref;

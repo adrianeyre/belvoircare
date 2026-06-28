@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB" data-theme="light">
+<html lang="en-GB" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#0a1626" media="(prefers-color-scheme: dark)" />
 
   <title>BelvoirCare Ltd — Bespoke Event Medical Cover Across the UK</title>
-  <meta name="description" content="BelvoirCare Ltd provides bespoke event medical cover across the UK since 2009 — festivals, sporting tournaments and village fetes. Qualified medics, rapid response vehicles and full treatment facilities. Book your event cover today." />
+  <meta name="description" content="BelvoirCare Ltd provides bespoke event medical cover and on-site wellbeing health checks across the UK since 2009 — festivals, sporting tournaments, village fetes and workplaces. Qualified medics, rapid response vehicles, full treatment facilities and same-day blood results. Book today." />
   <meta name="keywords" content="Event Medical Services, BelvoirCare Ltd, Event Medical Cover, First Aid Cover, Festival Medics, Ambulance Cover, Rapid Response, UK" />
   <link rel="canonical" href="https://belvoircare.com/" />
 
@@ -21,7 +21,7 @@
   <script>
     (function () {
       try {
-        var pref = localStorage.getItem('bc-theme') || 'system';
+        var pref = localStorage.getItem('bc-theme') || 'dark';
         var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var resolved = pref === 'system' ? (sysDark ? 'dark' : 'light') : pref;
         document.documentElement.setAttribute('data-theme', resolved);
@@ -73,6 +73,7 @@
       <nav class="nav-links" id="navLinks" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#services">Services</a>
+        <a href="#wellbeing">Wellbeing</a>
         <a href="#fleet">Fleet</a>
         <a href="#shrimpy">Shrimpy</a>
         <a href="#compliance">Compliance</a>
@@ -243,6 +244,81 @@
             <li>Room dividers</li><li>Treatment beds</li><li>Patient monitors</li>
             <li>Portable sinks</li><li>Tables &amp; chairs</li><li>Shelving</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WELLBEING ============ -->
+    <section class="section section-wellbeing" id="wellbeing">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-kicker reveal" data-reveal><span class="new-pill">New</span> Wellbeing services</p>
+          <h2 class="section-title reveal" data-reveal data-reveal-delay="1">On-site health checks, wherever your people are</h2>
+          <p class="section-intro reveal" data-reveal data-reveal-delay="2">
+            We bring a complete health-check service into any workplace, festival or public space —
+            giving your people fast, professional insight into their health, on the day.
+          </p>
+        </div>
+
+        <!-- What we check -->
+        <div class="wb-checks">
+          <article class="wb-check reveal" data-reveal>
+            <span class="wb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span>
+            <div><h3>Blood tests</h3><p>Same-day results — usually back within the hour.</p></div>
+          </article>
+          <article class="wb-check reveal" data-reveal data-reveal-delay="1">
+            <span class="wb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-7 4 14 2-7h8"/></svg></span>
+            <div><h3>ECG</h3><p>Heart rhythm trace, reviewed on site by a clinician.</p></div>
+          </article>
+          <article class="wb-check reveal" data-reveal data-reveal-delay="2">
+            <span class="wb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-9.3-9A5 5 0 0 1 12 6a5 5 0 0 1 9.3 6c-2.3 4.7-9.3 9-9.3 9z"/></svg></span>
+            <div><h3>Blood pressure</h3><p>Accurate readings with instant context and advice.</p></div>
+          </article>
+          <article class="wb-check reveal" data-reveal data-reveal-delay="3">
+            <span class="wb-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div><h3>Heart rate &amp; more</h3><p>Plus a range of further checks tailored to your event.</p></div>
+          </article>
+        </div>
+
+        <!-- 3-bay journey -->
+        <h3 class="wb-journey-title reveal" data-reveal>How it works — a simple 3-bay journey</h3>
+        <ol class="bays">
+          <li class="bay reveal" data-reveal>
+            <span class="bay-tag">Bay 1</span>
+            <span class="bay-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span>
+            <h4>Bloods taken</h4>
+            <p>A quick, professional blood draw to start your health check.</p>
+          </li>
+          <li class="bay reveal" data-reveal data-reveal-delay="1">
+            <span class="bay-tag">Bay 2</span>
+            <span class="bay-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-7 4 14 2-7h8"/></svg></span>
+            <h4>Observations</h4>
+            <p>ECG, blood pressure, heart rate and key observations recorded.</p>
+          </li>
+          <li class="bay reveal" data-reveal data-reveal-delay="2">
+            <span class="bay-tag">Bay 3</span>
+            <span class="bay-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/><path d="m16 10 1.5 1.5L21 8"/></svg></span>
+            <h4>Clinical review</h4>
+            <p>Sit down with a Technician or Paramedic to review your results.</p>
+          </li>
+        </ol>
+
+        <div class="wb-banner reveal" data-reveal>
+          <div class="wb-stat">
+            <span class="wb-stat-num">~30<span class="wb-unit">min</span></span>
+            <span class="wb-stat-label">Per person, start to finish</span>
+          </div>
+          <div class="wb-divider" aria-hidden="true"></div>
+          <div class="wb-stat">
+            <span class="wb-stat-num">&lt; 1<span class="wb-unit">hr</span></span>
+            <span class="wb-stat-label">Blood results, usually</span>
+          </div>
+          <div class="wb-divider" aria-hidden="true"></div>
+          <div class="wb-stat">
+            <span class="wb-stat-num">Any<span class="wb-unit">site</span></span>
+            <span class="wb-stat-label">Workplace, festival or public space</span>
+          </div>
+          <a href="#contact" class="btn btn-accent btn-lg wb-cta">Book a wellbeing day</a>
         </div>
       </div>
     </section>
@@ -485,6 +561,7 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="#about">About</a>
         <a href="#services">Services</a>
+        <a href="#wellbeing">Wellbeing</a>
         <a href="#fleet">Fleet</a>
         <a href="#compliance">Compliance</a>
         <a href="#contact">Contact</a>
@@ -492,7 +569,13 @@
     </div>
     <div class="container footer-bottom">
       <p>&copy; <span id="year">2026</span> BelvoirCare Ltd. All rights reserved.</p>
-      <p>ICO registered &middot; Aligned with The Purple Guide</p>
+      <p class="footer-meta">
+        <span>ICO registered &middot; Aligned with The Purple Guide</span>
+        <a class="design-credit" href="https://github.com/adrianeyre/belvoircare" target="_blank" rel="noopener" aria-label="Website design — view the source on GitHub">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.42c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 5.82 0c2.22-1.5 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.75.81 1.2 1.84 1.2 3.1 0 4.43-2.7 5.41-5.26 5.69.42.36.8 1.08.8 2.18v3.23c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          <span>Website design</span>
+        </a>
+      </p>
     </div>
   </footer>
 
