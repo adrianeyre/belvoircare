@@ -21,7 +21,7 @@
   <script>
     (function () {
       try {
-        var pref = localStorage.getItem('bc-theme') || 'dark';
+        var pref = localStorage.getItem('bc-theme') || 'system';
         var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var resolved = pref === 'system' ? (sysDark ? 'dark' : 'light') : pref;
         document.documentElement.setAttribute('data-theme', resolved);
@@ -181,15 +181,15 @@
           </ul>
         </div>
         <div class="col-media reveal" data-reveal data-reveal-delay="2">
-          <div class="feature-card glass">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 1 3 3v1h2a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h2V5a3 3 0 0 1 3-3z"/><path d="M12 11v4M10 13h4"/></svg>
-            </div>
-            <h3>Meticulous event planning</h3>
-            <p>Risk assessments, staffing ratios and on-site provisions matched precisely to your event profile.</p>
-            <div class="mini-stats">
-              <div><strong>UK-wide</strong><span>coverage</span></div>
-              <div><strong>Any scale</strong><span>festival to fete</span></div>
+          <div class="about-media">
+            <figure class="media-frame about-media-main">
+              <img src="assets/images/team01.jpg" alt="The BelvoirCare medical team on duty in branded hi-vis jackets beside their medical tent at a night-time festival." width="2000" height="1500" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="media-frame about-media-inset">
+              <img src="assets/images/team03.jpg" alt="Two smiling BelvoirCare medics on duty at a busy winter city-centre event." width="1600" height="1200" loading="lazy" decoding="async" />
+            </figure>
+            <div class="media-badge glass">
+              <strong>500+</strong><span>events covered, UK-wide</span>
             </div>
           </div>
         </div>
@@ -236,6 +236,17 @@
             <h3>On-site treatment rooms</h3>
             <p>We transform any indoor space into a fully functioning multi-patient treatment facility.</p>
           </article>
+        </div>
+
+        <div class="events-showcase">
+          <figure class="media-frame event-shot reveal" data-reveal>
+            <img src="assets/images/event01.jpg" alt="A large summer music festival crowd in front of the main stage, where BelvoirCare provided medical cover." width="2048" height="1536" loading="lazy" decoding="async" />
+            <figcaption class="media-cap">Main-stage cover at a summer music festival</figcaption>
+          </figure>
+          <figure class="media-frame event-shot reveal" data-reveal data-reveal-delay="1">
+            <img src="assets/images/event02.jpg" alt="A busy winter wonderland city-centre event lit up at night, kept safe by BelvoirCare medics." width="1600" height="1200" loading="lazy" decoding="async" />
+            <figcaption class="media-cap">Keeping a winter city-centre event safe</figcaption>
+          </figure>
         </div>
 
         <div class="equip reveal" data-reveal>
@@ -332,6 +343,21 @@
           <p class="section-intro reveal" data-reveal data-reveal-delay="2">BelvoirCare can provide a wide range of support vehicles, matched to your site and risk profile.</p>
         </div>
 
+        <div class="fleet-gallery">
+          <figure class="media-frame fleet-shot fleet-shot-lg reveal" data-reveal>
+            <img src="assets/images/vehicles01.jpg" alt="A BelvoirCare event ambulance branded 'Event Medical Support' parked alongside a green-and-yellow rapid-response car." width="1702" height="926" loading="lazy" decoding="async" />
+            <figcaption class="media-cap">Fully branded ambulance &amp; rapid-response cars</figcaption>
+          </figure>
+          <figure class="media-frame fleet-shot reveal" data-reveal data-reveal-delay="1">
+            <img src="assets/images/vehicles02.jpg" alt="A BelvoirCare emergency ambulance and ambulance-responder car on a sunny day at an outdoor event." width="960" height="720" loading="lazy" decoding="async" />
+            <figcaption class="media-cap">Emergency ambulance &amp; responder vehicle</figcaption>
+          </figure>
+          <figure class="media-frame fleet-shot reveal" data-reveal data-reveal-delay="2">
+            <img src="assets/images/vehicles03.jpg" alt="A BelvoirCare medic with the Cycle Response Unit bike beside an ambulance-responder vehicle." width="1100" height="825" loading="lazy" decoding="async" />
+            <figcaption class="media-cap">Cycle Response Unit for crowded sites</figcaption>
+          </figure>
+        </div>
+
         <div class="fleet-grid">
           <div class="fleet-item reveal" data-reveal><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V7h11v10M14 10h4l3 3v4h-7"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg></span> Unmarked vehicles</div>
           <div class="fleet-item reveal" data-reveal data-reveal-delay="1"><span class="fleet-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17V8h12v9M15 11h3l3 3v3h-6"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/><path d="M8 6V3M6.5 4.5h3"/></svg></span> Rapid Response Vehicles</div>
@@ -420,6 +446,15 @@
           <p class="section-kicker reveal" data-reveal>Compliance &amp; safety</p>
           <h2 class="section-title reveal" data-reveal data-reveal-delay="1">Safety and confidentiality, built in</h2>
         </div>
+
+        <figure class="media-frame compliance-banner reveal" data-reveal>
+          <img src="assets/images/training01.jpg" alt="BelvoirCare medics running a scenario-based training exercise, treating a patient on a stretcher beside an ambulance." width="2048" height="1536" loading="lazy" decoding="async" />
+          <figcaption class="media-cap media-cap-lg">
+            <strong>Continuous, scenario-based training</strong>
+            <span>Our medics regularly rehearse real incidents, so they're ready for yours.</span>
+          </figcaption>
+        </figure>
+
         <div class="card-grid compliance-grid">
           <article class="card reveal" data-reveal>
             <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
@@ -464,6 +499,16 @@
             <figcaption>Community Event Lead</figcaption>
           </figure>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA BAND ============ -->
+    <section class="cta-band" aria-labelledby="ctaBandTitle">
+      <img class="cta-band-bg" src="assets/images/team02.jpg" alt="" aria-hidden="true" width="2048" height="1537" loading="lazy" decoding="async" />
+      <div class="container cta-band-inner">
+        <h2 id="ctaBandTitle" class="reveal" data-reveal>Ready to cover your event?</h2>
+        <p class="reveal" data-reveal data-reveal-delay="1">Trusted UK event medics since 2009 — from summer festivals and sporting tournaments to winter markets, village fetes and workplaces.</p>
+        <a href="#contact" class="btn btn-accent btn-lg reveal" data-reveal data-reveal-delay="2">Book your event cover</a>
       </div>
     </section>
 

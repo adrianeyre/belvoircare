@@ -451,6 +451,84 @@ ul, ol { list-style: none; padding: 0; }
   .hero-cta { flex-direction: column; }
 }
 
+/* ---------- Imagery / media ---------- */
+/* Reusable photo frame: rounded, themed border, intrinsic ratio set per use */
+.media-frame {
+  position: relative; margin: 0; overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  background: var(--surface-2);
+}
+.media-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Caption that sits over the lower edge of a photo */
+.media-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 1.6rem 1.2rem .95rem;
+  color: #fff; font-family: var(--font-head); font-weight: 600; font-size: .95rem;
+  background: linear-gradient(to top, rgba(4, 12, 24, .85), rgba(4, 12, 24, .35) 55%, transparent);
+}
+.media-cap-lg { padding-top: 2.4rem; }
+.media-cap-lg strong { display: block; font-size: clamp(1.15rem, 2.4vw, 1.5rem); font-weight: 800; margin-bottom: .25rem; }
+.media-cap-lg span { display: block; font-weight: 500; color: rgba(255, 255, 255, .86); }
+
+/* About — team photo collage with floating glass stat badge */
+.about-media { position: relative; padding-right: clamp(0px, 5vw, 2.4rem); padding-bottom: 2.4rem; }
+.about-media-main { aspect-ratio: 4 / 3; }
+.about-media-inset {
+  position: absolute; right: 0; bottom: 0; width: 46%; aspect-ratio: 4 / 3;
+  border: 5px solid var(--bg); border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+.media-badge {
+  position: absolute; left: clamp(.7rem, 2.5vw, 1.1rem); top: clamp(.7rem, 2.5vw, 1.1rem);
+  display: flex; align-items: center; gap: .7rem;
+  padding: .7rem 1rem; border-radius: 16px;
+}
+.media-badge strong { font-family: var(--font-head); font-weight: 800; font-size: 1.6rem; color: var(--heading); line-height: 1; }
+.media-badge span { font-size: .8rem; color: var(--text-muted); max-width: 13ch; line-height: 1.25; }
+
+/* Services — events we cover showcase */
+.events-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin-top: clamp(2.2rem, 5vw, 3rem); }
+.event-shot { aspect-ratio: 16 / 10; transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out); }
+.event-shot img { transition: transform .6s var(--ease-out); }
+.event-shot:hover { box-shadow: var(--shadow-lg); }
+.event-shot:hover img { transform: scale(1.04); }
+
+/* Fleet — vehicle bento gallery */
+.fleet-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; margin-bottom: clamp(2rem, 5vw, 2.6rem); }
+.fleet-shot { aspect-ratio: 4 / 3; transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out); }
+.fleet-shot img { transition: transform .6s var(--ease-out); }
+.fleet-shot:hover { box-shadow: var(--shadow-lg); }
+.fleet-shot:hover img { transform: scale(1.04); }
+.fleet-shot-lg { grid-column: 1 / -1; aspect-ratio: 16 / 7; }
+
+/* Compliance — training banner */
+.compliance-banner { aspect-ratio: 21 / 9; margin-bottom: clamp(2.2rem, 5vw, 3rem); }
+
+/* Full-bleed CTA band over a branded photo */
+.cta-band { position: relative; isolation: isolate; overflow: hidden; padding: clamp(3.5rem, 9vw, 6.5rem) 0; }
+.cta-band-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.cta-band::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg, rgba(6, 16, 32, .9), rgba(6, 16, 32, .66) 55%, rgba(11, 79, 176, .5));
+}
+.cta-band-inner { text-align: center; max-width: 680px; }
+.cta-band h2 { color: #fff; font-size: clamp(1.9rem, 4.5vw, 2.8rem); }
+.cta-band p { color: rgba(255, 255, 255, .9); font-size: clamp(1.05rem, 2vw, 1.2rem); margin: 1rem auto 1.9rem; max-width: 56ch; }
+
+@media (max-width: 680px) {
+  .events-showcase { grid-template-columns: 1fr; }
+  .fleet-gallery { grid-template-columns: 1fr; }
+  .fleet-shot-lg { aspect-ratio: 16 / 10; }
+  .compliance-banner { aspect-ratio: 16 / 10; }
+}
+@media (max-width: 560px) {
+  .about-media { padding: 0; }
+  .about-media-inset { position: static; width: 62%; margin: -2.6rem 0 0 auto; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
