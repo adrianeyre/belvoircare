@@ -1,0 +1,7 @@
+# robots.txt for BelvoirCare Ltd
+# Allow all well-behaved crawlers to index the whole site.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://belvoircare.com/sitemap.xml
