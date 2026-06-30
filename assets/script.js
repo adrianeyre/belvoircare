@@ -314,4 +314,131 @@
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
   });
+
+  /* ---------- Testimonials carousel (auto-scroll RTL + drag/swipe) ---------- */
+  (function initCarousel() {
+    var vp = document.getElementById('reviewCarousel');
+    if (!vp) return;
+    var track = vp.querySelector('.tcarousel-track');
+    if (!track) return;
+    var wrap = vp.closest('.tcarousel');
+    var prevBtn = wrap && wrap.querySelector('.tcarousel-prev');
+    var nextBtn = wrap && wrap.querySelector('.tcarousel-next');
+
+    // Triple the cards (two extra copies) and park in the MIDDLE copy, so there is a
+    // full set of content on both sides — the strip loops endlessly left AND right.
+    var originals = Array.prototype.slice.call(track.children);
+    var count = originals.length;
+    if (!count) return;
+    for (var pass = 0; pass < 2; pass++) {
+      originals.forEach(function (node) {
+        var clone = node.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('tabindex', '-1');
+        Array.prototype.forEach.call(clone.querySelectorAll('a, [tabindex]'), function (el) {
+          el.setAttribute('tabindex', '-1');
+        });
+        track.appendChild(clone);
+      });
+    }
+
+    // Width of one set (first card of copy 0 -> first card of copy 1).
+    function loopWidth() {
+      var c1 = track.children[count];
+      if (!c1) return 0;
+      return c1.offsetLeft - track.children[0].offsetLeft;
+    }
+    // Keep the scroll position within the middle copy [w, 2w); wrap by exactly one set.
+    function normalize() {
+      var w = loopWidth();
+      if (w <= 0) return;
+      if (vp.scrollLeft >= 2 * w) vp.scrollLeft -= w;
+      else if (vp.scrollLeft < w) vp.scrollLeft += w;
+    }
+
+    // Start parked in the middle copy.
+    var startW = loopWidth();
+    if (startW > 0) vp.scrollLeft = startW;
+
+    var paused = false;        // hover / focus
+    var dragging = false;      // mouse drag in progress
+    var userUntil = 0;         // brief yield after wheel/touch/arrow
+    var SPEED = 1.0;           // px per frame — continuous drift, right to left (~60px/s)
+    var pos = vp.scrollLeft || 0; // float accumulator (scrollLeft is rounded to int on read)
+
+    function autoActive() {
+      return !prefersReduced && !paused && !dragging && Date.now() > userUntil;
+    }
+    function tick() {
+      if (autoActive()) {
+        var w = loopWidth();
+        pos += SPEED;                                 // advance right-to-left (content moves left)
+        if (w > 0) { if (pos >= 2 * w) pos -= w; else if (pos < w) pos += w; }
+        vp.scrollLeft = pos;
+      } else {
+        pos = vp.scrollLeft;                          // resync to manual scroll / drag / hover
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // Pause while the pointer is over the carousel or focus is inside it; resume on leave.
+    if (wrap) {
+      wrap.addEventListener('mouseenter', function () { paused = true; });
+      wrap.addEventListener('mouseleave', function () { paused = false; });
+    }
+    vp.addEventListener('focusin', function () { paused = true; });
+    vp.addEventListener('focusout', function () { paused = false; });
+
+    // Touch / wheel: let native scrolling drive, just yield the auto-drift briefly.
+    vp.addEventListener('wheel', function () { userUntil = Date.now() + 1800; }, { passive: true });
+    vp.addEventListener('touchstart', function () { userUntil = Date.now() + 2500; }, { passive: true });
+    vp.addEventListener('touchmove', function () { userUntil = Date.now() + 2500; }, { passive: true });
+    vp.addEventListener('scroll', normalize, { passive: true });
+
+    // Mouse drag-to-scroll (touch/pen use native momentum scrolling).
+    var startX = 0, startLeft = 0;
+    vp.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      dragging = true; startX = e.clientX; startLeft = vp.scrollLeft;
+      vp.classList.add('dragging');
+      try { vp.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    vp.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var w = loopWidth();
+      var target = startLeft - (e.clientX - startX);
+      // wrap mid-drag so dragging never dead-ends; rebase the anchor by the same amount.
+      if (w > 0) {
+        if (target >= 2 * w) { target -= w; startLeft -= w; }
+        else if (target < w) { target += w; startLeft += w; }
+      }
+      vp.scrollLeft = target;
+    });
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      vp.classList.remove('dragging');
+      try { vp.releasePointerCapture(e.pointerId); } catch (_) {}
+      userUntil = Date.now() + 1200;
+    }
+    vp.addEventListener('pointerup', endDrag);
+    vp.addEventListener('pointercancel', endDrag);
+
+    // Arrow controls: advance by roughly one card.
+    function step() {
+      var c = track.querySelector('.tcard');
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 22;
+      return c ? c.getBoundingClientRect().width + gap : 320;
+    }
+    function nudge(dir) {
+      userUntil = Date.now() + 2500;
+      vp.scrollBy({ left: dir * step(), behavior: prefersReduced ? 'auto' : 'smooth' });
+      setTimeout(normalize, prefersReduced ? 0 : 420);
+    }
+    // Match the chevron direction: the LEFT (‹) button moves the strip left,
+    // the RIGHT (›) button moves it right.
+    if (prevBtn) prevBtn.addEventListener('click', function () { nudge(1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { nudge(-1); });
+  })();
 })();

@@ -48,7 +48,10 @@ modern single-page layout.
 
 ## Design system
 
-Generated with the `ui-ux-pro-max` skill: *Accessible & Ethical* healthcare style, professional blue
-(`#0b4fb0`) primary with an emergency coral accent (`#ff5a3c`), Figtree headings + Noto Sans body.
-Brand colours, spacing and radii are defined as CSS custom properties in `assets/styles.css` and
-themed per mode — change them in one place.
+Colours are sampled directly from the BelvoirCare logo: a professional **navy** (`#34516d`) primary
+with a warm **amber** accent (`#ee9635`) — the same navy/amber pairing as the crown, initials and
+Star of Life in the mark. Amber-on-light text uses a darker, AA-accessible `--accent-ink`, and amber
+buttons carry navy ink for contrast. Figtree headings + Noto Sans body. Brand colours, spacing and
+radii are defined as CSS custom properties in `assets/styles.css` and themed per mode — change them
+in one place. The header/footer use the logo mark (`assets/images/logo-mark.png`, white background
+removed) beside the wordmark, with an animated EKG line tying the pulse motif into the lockup.
