@@ -38,7 +38,6 @@
   --shadow-lg: 0 24px 60px rgba(22, 36, 47, .17);
   --glass-bg: rgba(255, 255, 255, .65);
   --glass-brd: rgba(255, 255, 255, .8);
-  --hero-grid: rgba(52, 81, 109, .07);
 
   /* Type */
   --font-head: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -77,7 +76,6 @@
   --shadow-lg: 0 28px 70px rgba(0, 0, 0, .6);
   --glass-bg: rgba(19, 36, 58, .6);
   --glass-brd: rgba(123, 166, 212, .16);
-  --hero-grid: rgba(123, 166, 212, .08);
   --accent-ink: #f5b461;          /* light amber for small accent text on dark */
   --accent-soft: rgba(238, 150, 53, .16);
 }
@@ -205,8 +203,6 @@ ul, ol { list-style: none; padding: 0; }
 /* ---------- Hero ---------- */
 .hero { position: relative; padding-top: calc(var(--header-h) + clamp(2.5rem, 7vw, 5rem)); padding-bottom: clamp(2rem, 5vw, 4rem); overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background-image: linear-gradient(var(--hero-grid) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid) 1px, transparent 1px);
-  background-size: 44px 44px;
   -webkit-mask-image: radial-gradient(120% 80% at 50% 0%, #000 40%, transparent 80%);
   mask-image: radial-gradient(120% 80% at 50% 0%, #000 40%, transparent 80%);
 }
@@ -499,7 +495,10 @@ ul, ol { list-style: none; padding: 0; }
 .media-badge span { font-size: .8rem; color: var(--text-muted); max-width: 13ch; line-height: 1.25; }
 
 /* Services — events we cover showcase */
-.events-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin-top: clamp(2.2rem, 5vw, 3rem); }
+.ecarousel { margin-top: clamp(2.2rem, 5vw, 3rem); }
+/* Each slide keeps the original two-up showcase size (~half the container) and
+   its 16:10 crop; align-self stops the flex row from stretching the height. */
+.event-slide { flex: 0 0 clamp(280px, 82vw, 560px); align-self: flex-start; }
 .event-shot { aspect-ratio: 16 / 10; transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out); }
 .event-shot img { transition: transform .6s var(--ease-out); }
 .event-shot:hover { box-shadow: var(--shadow-lg); }
@@ -528,7 +527,6 @@ ul, ol { list-style: none; padding: 0; }
 .cta-band p { color: rgba(255, 255, 255, .9); font-size: clamp(1.05rem, 2vw, 1.2rem); margin: 1rem auto 1.9rem; max-width: 56ch; }
 
 @media (max-width: 680px) {
-  .events-showcase { grid-template-columns: 1fr; }
   .fleet-gallery { grid-template-columns: 1fr; }
   .fleet-shot-lg { aspect-ratio: 16 / 10; }
   .compliance-banner { aspect-ratio: 16 / 10; }
@@ -550,6 +548,13 @@ ul, ol { list-style: none; padding: 0; }
 }
 .tcarousel-viewport::-webkit-scrollbar { display: none; }
 .tcarousel-viewport.dragging { cursor: grabbing; }
+/* Let touch swipe scroll horizontally while the page still scrolls vertically,
+   and stop images from being "grabbed" (native drag) instead of scrolling. */
+.tcarousel-viewport { touch-action: pan-x pan-y; }
+.tcarousel-viewport img {
+  -webkit-user-drag: none; user-select: none; -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
 .tcarousel-track { display: flex; gap: 1.4rem; align-items: stretch; padding: .9rem .25rem 1.5rem; }
 
 /* Fixed-width cards: ~3 visible on desktop, ~1 + peek on mobile.

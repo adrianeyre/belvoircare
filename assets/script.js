@@ -315,10 +315,12 @@
     }
   });
 
-  /* ---------- Testimonials carousel (auto-scroll RTL + drag/swipe) ---------- */
-  (function initCarousel() {
-    var vp = document.getElementById('reviewCarousel');
-    if (!vp) return;
+  /* ---------- Carousels: auto-scroll RTL + drag/swipe (testimonials + events) ---------- */
+  (function initCarousels() {
+    Array.prototype.forEach.call(document.querySelectorAll('.tcarousel-viewport'), setupCarousel);
+  })();
+
+  function setupCarousel(vp) {
     var track = vp.querySelector('.tcarousel-track');
     if (!track) return;
     var wrap = vp.closest('.tcarousel');
@@ -396,10 +398,15 @@
     vp.addEventListener('touchmove', function () { userUntil = Date.now() + 2500; }, { passive: true });
     vp.addEventListener('scroll', normalize, { passive: true });
 
+    // Stop the browser's native image drag-and-drop from hijacking the gesture.
+    // Image-heavy carousels (the events strip) can't be mouse-dragged without this.
+    vp.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
     // Mouse drag-to-scroll (touch/pen use native momentum scrolling).
     var startX = 0, startLeft = 0;
     vp.addEventListener('pointerdown', function (e) {
       if (e.pointerType !== 'mouse') return;
+      e.preventDefault(); // suppress native image drag / text selection so the drag scrolls
       dragging = true; startX = e.clientX; startLeft = vp.scrollLeft;
       vp.classList.add('dragging');
       try { vp.setPointerCapture(e.pointerId); } catch (_) {}
@@ -427,7 +434,7 @@
 
     // Arrow controls: advance by roughly one card.
     function step() {
-      var c = track.querySelector('.tcard');
+      var c = track.firstElementChild;
       var gap = parseFloat(getComputedStyle(track).columnGap) || 22;
       return c ? c.getBoundingClientRect().width + gap : 320;
     }
@@ -440,5 +447,5 @@
     // the RIGHT (›) button moves it right.
     if (prevBtn) prevBtn.addEventListener('click', function () { nudge(1); });
     if (nextBtn) nextBtn.addEventListener('click', function () { nudge(-1); });
-  })();
+  }
 })();

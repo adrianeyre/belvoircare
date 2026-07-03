@@ -1,9 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://belvoircare.com/</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/social01.jpg</image:loc>
+      <image:title>BelvoirCare event medical team on duty at a festival</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event01.jpg</image:loc>
+      <image:title>Main-stage medical cover at a summer music festival</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event02.jpg</image:loc>
+      <image:title>Keeping a winter city-centre event safe</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event03.jpg</image:loc>
+      <image:title>Race-day cover at a local duathlon</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event04.jpg</image:loc>
+      <image:title>Medical cover at a city-centre Pride celebration</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event05.jpg</image:loc>
+      <image:title>Festival night cover under the lasers</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event06.jpg</image:loc>
+      <image:title>BelvoirCare ambulance ready for duty at Belvoir Castle</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event07.jpg</image:loc>
+      <image:title>Evening cover at a village music night</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/event08.jpg</image:loc>
+      <image:title>Rapid-response standby on the roadside</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/vehicles01.jpg</image:loc>
+      <image:title>Fully branded ambulance and rapid-response cars</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/vehicles02.jpg</image:loc>
+      <image:title>Emergency ambulance and responder vehicle</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://belvoircare.com/assets/images/vehicles03.jpg</image:loc>
+      <image:title>Cycle Response Unit for crowded sites</image:title>
+    </image:image>
   </url>
 </urlset>

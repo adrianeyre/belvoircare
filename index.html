@@ -8,11 +8,21 @@
 
   <title>BelvoirCare Ltd — Bespoke Event Medical Cover Across the UK</title>
   <meta name="description" content="BelvoirCare Ltd provides bespoke event medical cover and on-site wellbeing health checks across the UK since 2009 — festivals, sporting tournaments, village fetes and workplaces. Qualified medics, rapid response vehicles, full treatment facilities and same-day blood results. Book today." />
-  <meta name="keywords" content="Event Medical Services, BelvoirCare Ltd, Event Medical Cover, First Aid Cover, Festival Medics, Ambulance Cover, Rapid Response, UK" />
+  <meta name="keywords" content="Event Medical Services, BelvoirCare Ltd, Event Medical Cover, First Aid Cover, Festival Medics, Ambulance Cover, Rapid Response, Event Paramedics, Wellbeing Health Checks, UK" />
   <link rel="canonical" href="https://belvoircare.com/" />
+
+  <!-- Crawling & indexing directives -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="BelvoirCare Ltd" />
+
+  <!-- Geo / regional targeting -->
+  <meta name="geo.region" content="GB-LEC" />
+  <meta name="geo.placename" content="Vale of Belvoir, Leicestershire, United Kingdom" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
   <meta property="og:site_name" content="BelvoirCare Ltd" />
   <meta property="og:title" content="BelvoirCare Ltd — Bespoke Event Medical Cover" />
   <meta property="og:description" content="Reliable, professional medical cover for events of any size across the UK. Trusted since 2009." />
@@ -60,18 +70,168 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    "name": "BelvoirCare Ltd",
-    "description": "Bespoke event medical cover across the UK since 2009.",
-    "url": "https://belvoircare.com/",
-    "telephone": "+447724026520",
-    "email": "events@belvoircare.com",
-    "areaServed": "United Kingdom",
-    "foundingDate": "2009",
-    "openingHours": "Mo-Su 00:00-23:59",
-    "sameAs": [
-      "https://www.facebook.com/BelvoirCareLTD",
-      "https://instagram.com/belvoircareltd"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://belvoircare.com/#organization",
+        "name": "BelvoirCare Ltd",
+        "legalName": "BelvoirCare Ltd",
+        "url": "https://belvoircare.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://belvoircare.com/assets/images/logo-mark.png",
+          "width": 55,
+          "height": 42
+        },
+        "image": "https://belvoircare.com/assets/images/social01.jpg",
+        "foundingDate": "2009",
+        "email": "events@belvoircare.com",
+        "telephone": "+447724026520",
+        "sameAs": [
+          "https://www.facebook.com/BelvoirCareLTD",
+          "https://instagram.com/belvoircareltd"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://belvoircare.com/#website",
+        "url": "https://belvoircare.com/",
+        "name": "BelvoirCare Ltd",
+        "description": "Bespoke event medical cover and on-site wellbeing health checks across the UK.",
+        "publisher": { "@id": "https://belvoircare.com/#organization" },
+        "inLanguage": "en-GB"
+      },
+      {
+        "@type": ["MedicalBusiness", "EmergencyService", "LocalBusiness"],
+        "@id": "https://belvoircare.com/#business",
+        "name": "BelvoirCare Ltd",
+        "description": "BelvoirCare Ltd provides bespoke event medical cover and on-site wellbeing health checks across the UK since 2009 — festivals, sporting tournaments, village fetes and workplaces. Qualified medics, rapid response vehicles, full treatment facilities and same-day blood results.",
+        "url": "https://belvoircare.com/",
+        "telephone": "+447724026520",
+        "email": "events@belvoircare.com",
+        "image": "https://belvoircare.com/assets/images/social01.jpg",
+        "logo": "https://belvoircare.com/assets/images/logo-mark.png",
+        "priceRange": "££",
+        "foundingDate": "2009",
+        "parentOrganization": { "@id": "https://belvoircare.com/#organization" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Leicestershire",
+          "addressCountry": "GB"
+        },
+        "areaServed": [
+          { "@type": "Country", "name": "United Kingdom" },
+          { "@type": "AdministrativeArea", "name": "Leicestershire" },
+          { "@type": "AdministrativeArea", "name": "Rutland" },
+          { "@type": "AdministrativeArea", "name": "Nottinghamshire" },
+          { "@type": "Place", "name": "Vale of Belvoir" }
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        ],
+        "sameAs": [
+          "https://www.facebook.com/BelvoirCareLTD",
+          "https://instagram.com/belvoircareltd"
+        ],
+        "knowsAbout": [
+          "Event medical cover",
+          "Festival medics",
+          "Sporting event first aid",
+          "Rapid response vehicles",
+          "Event ambulance cover",
+          "On-site wellbeing health checks"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Event medical services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Festival & concert medical cover", "description": "Crowd-aware medical teams for music festivals and large gatherings, scaled to attendance." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sporting tournament cover", "description": "Pitch-side and trackside cover with rapid response for competitors and spectators." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Village fete & community event cover", "description": "Friendly, proportionate medical cover for community events, fairs and local gatherings." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Overnight & multi-day medical support", "description": "Round-the-clock medical presence for multi-day and camping events." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "On-site treatment facilities", "description": "Any indoor space transformed into a fully functioning multi-patient treatment facility." } },
+            { "@type": "Offer", "itemOffered": { "@type": "MedicalTest", "name": "On-site wellbeing health checks", "description": "Blood tests with same-day results, ECG, blood pressure and heart-rate checks on site." } }
+          ]
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+            "author": { "@type": "Organization", "name": "Melton Mowbray Town Estate" },
+            "reviewBody": "We found the whole team to be very communicative, polite, well presented and prepared for every eventuality. The paperwork sent pre event was very comprehensive and gave us confidence. Our experience of this team was very positive."
+          },
+          {
+            "@type": "Review",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+            "author": { "@type": "Organization", "name": "Loughborough Mela" },
+            "reviewBody": "Had an amazing experience with BelvoirCare at Loughborough Mela! Their medical cover was top-notch, providing great service at an affordable price. The team was incredibly helpful and responsive. Highly recommend them for any event!"
+          },
+          {
+            "@type": "Review",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+            "author": { "@type": "Person", "name": "Phil Allen" },
+            "reviewBody": "We used Belvoir Care to provide First Aid cover at our two day Junior Football Tournament. Staff were efficient, approachable and empathetic. From before booking and throughout, communication was amazing. We wouldn't hesitate in recommending them."
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "bestRating": "5",
+          "worstRating": "1",
+          "reviewCount": "12"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://belvoircare.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What types of events do you provide medical cover for?",
+            "acceptedAnswer": { "@type": "Answer", "text": "We cover events of any size — from music festivals and concerts to sporting tournaments, village fetes, community fairs and workplaces. Medical teams are scaled to your expected attendance and risk profile." }
+          },
+          {
+            "@type": "Question",
+            "name": "Where in the UK does BelvoirCare operate?",
+            "acceptedAnswer": { "@type": "Answer", "text": "BelvoirCare provides event medical cover across the United Kingdom. We are based in the Vale of Belvoir and regularly work throughout Leicestershire, Rutland, Nottinghamshire and beyond." }
+          },
+          {
+            "@type": "Question",
+            "name": "Are your medics qualified?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our team holds nationally recognised medical qualifications and rehearses scenario-based training regularly, so they are ready to respond swiftly to any situation." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you provide overnight or multi-day cover?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. We provide round-the-clock medical presence for multi-day and camping events, including overnight support." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is included in your on-site wellbeing health checks?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Our wellbeing service brings health checks to any workplace, festival or public space: blood tests with same-day results (usually within the hour), ECG, blood pressure, heart rate and a clinical review with a technician or paramedic." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I book event medical cover?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Get in touch by phone on 07724 026520, WhatsApp, social media or email at events@belvoircare.com. Share your event dates, times, event type and the medical staff required, and we handle the rest." }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://belvoircare.com/#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://belvoircare.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://belvoircare.com/#services" },
+          { "@type": "ListItem", "position": 3, "name": "Wellbeing", "item": "https://belvoircare.com/#wellbeing" },
+          { "@type": "ListItem", "position": 4, "name": "Contact", "item": "https://belvoircare.com/#contact" }
+        ]
+      }
     ]
   }
   </script>
@@ -260,15 +420,49 @@
           </article>
         </div>
 
-        <div class="events-showcase">
-          <figure class="media-frame event-shot reveal" data-reveal>
-            <img src="assets/images/event01.jpg" alt="A large summer music festival crowd in front of the main stage, where BelvoirCare provided medical cover." width="2048" height="1536" loading="lazy" decoding="async" />
-            <figcaption class="media-cap">Main-stage cover at a summer music festival</figcaption>
-          </figure>
-          <figure class="media-frame event-shot reveal" data-reveal data-reveal-delay="1">
-            <img src="assets/images/event02.jpg" alt="A busy winter wonderland city-centre event lit up at night, kept safe by BelvoirCare medics." width="1600" height="1200" loading="lazy" decoding="async" />
-            <figcaption class="media-cap">Keeping a winter city-centre event safe</figcaption>
-          </figure>
+        <div class="tcarousel ecarousel reveal" data-reveal role="region" aria-roledescription="carousel" aria-label="Events BelvoirCare has provided medical cover for">
+          <button type="button" class="tcarousel-arrow tcarousel-prev" aria-label="Scroll event photos left">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="tcarousel-viewport">
+            <div class="tcarousel-track">
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event01.jpg" alt="A large summer music festival crowd in front of the main stage, where BelvoirCare provided medical cover." width="2048" height="1536" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">Main-stage cover at a summer music festival</figcaption>
+              </figure>
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event02.jpg" alt="A busy winter wonderland city-centre event lit up at night, kept safe by BelvoirCare medics." width="1600" height="1200" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">Keeping a winter city-centre event safe</figcaption>
+              </figure>
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event03.jpg" alt="Runners setting off at the start of a local duathlon road race, with BelvoirCare medics on standby." width="1400" height="788" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">Race-day cover at a local duathlon</figcaption>
+              </figure>
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event04.jpg" alt="A busy city-centre Pride celebration beneath rainbow flags, where BelvoirCare provided medical cover." width="1400" height="1050" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">On hand at a city-centre Pride celebration</figcaption>
+              </figure>
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event05.jpg" alt="A night-time festival crowd beneath a laser show, kept safe by BelvoirCare's event medics." width="1400" height="1050" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">Festival night cover under the lasers</figcaption>
+              </figure>
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event06.jpg" alt="A BelvoirCare ambulance parked in front of Belvoir Castle, ready to provide event cover." width="1080" height="810" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">Ready for duty at Belvoir Castle</figcaption>
+              </figure>
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event07.jpg" alt="An evening open-air live music event on a village green, covered by BelvoirCare medics." width="1344" height="653" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">Evening cover at a village music night</figcaption>
+              </figure>
+              <figure class="media-frame event-shot event-slide">
+                <img src="assets/images/event08.jpg" alt="A BelvoirCare rapid-response car on standby at a rural roadside location." width="1000" height="750" loading="lazy" decoding="async" />
+                <figcaption class="media-cap">Rapid-response standby on the roadside</figcaption>
+              </figure>
+            </div>
+          </div>
+          <button type="button" class="tcarousel-arrow tcarousel-next" aria-label="Scroll event photos right">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
 
         <div class="equip reveal" data-reveal>
