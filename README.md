@@ -1,7 +1,7 @@
 # BelvoirCare Ltd — Website
 
 A professional, single-page marketing website for **BelvoirCare Ltd**, providers of bespoke
-event medical cover across the UK since 2009.
+event medical cover across the UK since 2012.
 
 ## Features
 
