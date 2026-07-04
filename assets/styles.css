@@ -166,8 +166,8 @@ ul, ol { list-style: none; padding: 0; }
 .brand-text { letter-spacing: -.01em; }
 .brand-text strong { color: var(--accent-ink); font-weight: 800; }
 /* Animated EKG heartbeat line tucked under the wordmark — ties the logo to the pulse motif */
-.brand-ekg { width: 100%; height: 9px; color: var(--accent); overflow: visible; }
-.brand-ekg path { stroke-dasharray: 150; stroke-dashoffset: 150; animation: brandEkg 3.6s var(--ease-out) infinite; }
+.brand-ekg { width: 100%; height: 9px; color: var(--accent); overflow: hidden; }
+.brand-ekg path { animation: brandEkg 3.6s linear infinite; will-change: transform; }
 /* Footer keeps a compact heartbeat mark */
 .brand-pulse { stroke-dasharray: 40; animation: drawPulse 3s var(--ease-out) infinite; }
 
@@ -411,7 +411,7 @@ ul, ol { list-style: none; padding: 0; }
 
 /* ---------- Keyframes ---------- */
 @keyframes drawPulse { 0% { stroke-dashoffset: 80; } 60%, 100% { stroke-dashoffset: 0; } }
-@keyframes brandEkg { 0% { stroke-dashoffset: 150; } 55% { stroke-dashoffset: 0; } 80%, 100% { stroke-dashoffset: -150; } }
+@keyframes brandEkg { from { transform: translateX(0); } to { transform: translateX(-120px); } }
 @keyframes ekg { to { stroke-dashoffset: 0; } }
 @keyframes ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.6); opacity: 0; } }
 @keyframes floatGlow { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, 30px); } }
@@ -517,7 +517,7 @@ ul, ol { list-style: none; padding: 0; }
 
 /* Full-bleed CTA band over a branded photo */
 .cta-band { position: relative; isolation: isolate; overflow: hidden; padding: clamp(3.5rem, 9vw, 6.5rem) 0; }
-.cta-band-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.cta-band-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 66%; z-index: -2; }
 .cta-band::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background: linear-gradient(100deg, rgba(6, 16, 32, .9), rgba(13, 28, 44, .66) 55%, rgba(52, 81, 109, .58));
@@ -713,5 +713,5 @@ ul, ol { list-style: none; padding: 0; }
   }
   .reveal { opacity: 1; transform: none; }
   .hero-ekg path { stroke-dashoffset: 0; }
-  .brand-ekg path { stroke-dashoffset: 0; }
+  .brand-ekg path { animation: none; transform: none; }
 }
