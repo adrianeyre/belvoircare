@@ -119,6 +119,11 @@ ul, ol { list-style: none; padding: 0; }
 }
 .skip-link:focus { top: 1rem; }
 
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
 /* ---------- Buttons ---------- */
 .btn {
   --bg-btn: var(--primary);
@@ -645,6 +650,67 @@ ul, ol { list-style: none; padding: 0; }
 @media (max-width: 760px) {
   .tcarousel-arrow { display: none; }
   .tcarousel-track { gap: 1rem; }
+}
+
+/* ---------- News / Facebook posts ---------- */
+/* News sits directly below the (same-background) testimonials band, so the two sections'
+   stacked padding leaves an oversized empty gap — trim this section's top padding. */
+.section-flush-top { padding-top: clamp(1.5rem, 3.5vw, 2.75rem); }
+
+/* 3-up grid: equal columns, and grid stretch makes every card as tall as the tallest */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.post {
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .3s;
+}
+.post:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+
+/* Photo at the top — fixed 16:10 frame so every card's image band lines up */
+.post-media {
+  display: block; position: relative;
+  aspect-ratio: 16 / 10; background: var(--surface-2);
+  overflow: hidden;
+}
+.post-media img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s var(--ease-out);
+}
+.post:hover .post-media img { transform: scale(1.05); }
+
+/* Logo fallback — shown when a post has no photo (contained, on a soft brand tint) */
+.post-fallback { display: none; position: absolute; inset: 0; place-items: center;
+  background: linear-gradient(135deg, var(--surface-2), var(--accent-soft)); }
+.post-fallback img { width: auto; height: 46%; max-width: 62%; object-fit: contain; opacity: .92; }
+.post-media--fallback .post-fallback { display: grid; }
+.post:hover .post-media--fallback .post-fallback img { transform: none; }
+
+.post-body { display: flex; flex-direction: column; flex: 1; padding: 1.5rem; gap: 1.1rem; }
+.post-text { color: var(--text); font-size: .98rem; line-height: 1.62; margin: 0; }
+/* Push the button to the bottom so all CTAs align across the equal-height row */
+.post-more { align-self: flex-start; margin-top: auto; gap: .45rem; }
+.post-more svg { transition: transform .3s var(--ease-spring); }
+.post-more:hover svg { transform: translate(2px, -2px); }
+
+.post-seeall { text-align: center; margin-top: clamp(2rem, 4vw, 3rem); font-family: var(--font-head); font-weight: 600; }
+.post-seeall a { display: inline-flex; align-items: center; gap: .5rem; color: var(--heading); }
+.post-seeall a > svg:first-child { color: #1877F2; }
+[data-theme="dark"] .post-seeall a > svg:first-child { color: #5b9bff; }
+.post-seeall a:hover { color: var(--accent-ink); }
+.post-seeall-arrow { transition: transform .3s var(--ease-spring); }
+.post-seeall a:hover .post-seeall-arrow { transform: translateX(4px); }
+
+/* Tablet: 3 cards get cramped — drop to a single, comfortable column */
+@media (max-width: 860px) {
+  .post-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
 }
 
 /* ---------- Cookie consent banner ---------- */

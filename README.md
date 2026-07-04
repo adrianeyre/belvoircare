@@ -26,6 +26,20 @@ assets/
   favicon.svg       # brand mark
 ```
 
+## News / Facebook posts
+
+The **News** section (`#news`) shows the three latest Facebook posts as equal-height cards
+(photo on top — or the logo as a fallback for text-only posts — then the text and a *Read more*
+button linking to the post), followed by a *See all of our Facebook posts* link.
+
+Because this is a purely static site (no backend), the posts can't be pulled from Facebook live
+in the browser — the Graph API needs a server-side token, and scraping is blocked. So the three
+cards are curated by hand: to refresh them, edit the three `<article class="post">` blocks in
+`index.html`. A comment above the section spells out the three fields to change per card (photo
+`src`, post text, and the *Read more* URL). Remove the `<img>` line for a text-only post and the
+logo fallback shows automatically. *(This could later be automated with a scheduled GitHub Action
+that calls the Graph API and regenerates the cards.)*
+
 ## Run locally
 
 It's a static site — just open `index.html`, or serve it:
