@@ -212,7 +212,30 @@ ul, ol { list-style: none; padding: 0; }
 .hero-ekg { position: absolute; left: 0; right: 0; bottom: 8%; width: 100%; height: 140px; color: var(--accent); opacity: .28; }
 .hero-ekg path { stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: ekg 5s linear infinite; }
 
-.hero-inner { position: relative; z-index: 1; max-width: 860px; }
+.hero-inner { position: relative; z-index: 1; display: grid; gap: clamp(2rem, 5vw, 3.4rem); align-items: center; }
+.hero-copy { min-width: 0; max-width: 640px; }
+
+/* Hero photo — reuses .media-frame; balanced beside the copy on wide screens */
+.hero-media { position: relative; margin: 0; aspect-ratio: 16 / 11; }
+.hero-media .hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-media-badge {
+  position: absolute; left: clamp(.8rem, 2.5vw, 1.1rem); bottom: clamp(.8rem, 2.5vw, 1.1rem);
+  display: inline-flex; align-items: center; gap: .65rem;
+  padding: .6rem .95rem; border-radius: 14px;
+  background: var(--glass-bg); border: 1px solid var(--glass-brd);
+  box-shadow: var(--shadow-md); backdrop-filter: blur(10px);
+  font-family: var(--font-head);
+}
+.hero-media-badge svg { color: var(--primary); flex-shrink: 0; }
+.hero-media-badge span { display: flex; flex-direction: column; line-height: 1.2; }
+.hero-media-badge strong { font-weight: 800; font-size: .96rem; color: var(--heading); }
+.hero-media-badge small { font-size: .76rem; font-weight: 500; color: var(--text-muted); }
+
+@media (min-width: 900px) {
+  .hero-inner { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+  .hero-copy { max-width: none; }
+  .hero-media { aspect-ratio: 4 / 3.4; }
+}
 .eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--primary); background: var(--surface); border: 1px solid var(--border); padding: .45rem .9rem; border-radius: 999px; box-shadow: var(--shadow-sm); }
 .dot-pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); position: relative; }
 .dot-pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent); animation: ping 1.8s var(--ease-out) infinite; }
