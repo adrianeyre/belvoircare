@@ -26,8 +26,7 @@
     root.setAttribute('data-theme', resolve(pref));
     if (toggle) {
       toggle.setAttribute('data-mode', pref);
-      toggle.title = 'Theme: ' + labels[pref];
-      toggle.setAttribute('aria-label', 'Colour theme: ' + labels[pref] + '. Click to change.');
+      toggle.setAttribute('aria-label', 'Colour theme: ' + labels[pref] + '. Activate to change.');
     }
   }
   applyTheme(getPref());
@@ -58,11 +57,15 @@
   /* ---------- Mobile nav ---------- */
   var menuToggle = document.getElementById('menuToggle');
   var navLinks = document.getElementById('navLinks');
-  function closeMenu() {
+  function menuIsOpen() { return !!navLinks && navLinks.classList.contains('open'); }
+  function closeMenu(returnFocus) {
     if (!navLinks) return;
+    var wasOpen = menuIsOpen();
     navLinks.classList.remove('open');
     menuToggle.setAttribute('aria-expanded', 'false');
     menuToggle.setAttribute('aria-label', 'Open menu');
+    // Send focus back to the trigger, or it is stranded on a now-hidden link.
+    if (wasOpen && returnFocus) menuToggle.focus();
   }
   if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', function () {
@@ -71,9 +74,22 @@
       menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
     navLinks.addEventListener('click', function (e) {
-      if (e.target.closest('a')) closeMenu();
+      if (e.target.closest('a')) closeMenu(false);
     });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+    document.addEventListener('keydown', function (e) {
+      // Only claim Escape when the menu is actually open, so it stays available
+      // to whatever else is on screen (e.g. an open dialog).
+      if (e.key === 'Escape' && menuIsOpen()) closeMenu(true);
+    });
+  }
+
+  /* ---------- Skip link: move focus as well as the viewport ---------- */
+  var skipLink = document.querySelector('.skip-link');
+  if (skipLink) {
+    skipLink.addEventListener('click', function () {
+      var target = document.getElementById('main');
+      if (target) setTimeout(function () { target.focus(); }, 0);
+    });
   }
 
   /* ---------- Scroll reveal ---------- */
@@ -162,13 +178,15 @@
     function setError(name, msg) {
       var field = form.querySelector('[name="' + name + '"]').closest('.field');
       var errEl = form.querySelector('[data-error-for="' + name + '"]');
+      // Only touch the text when it actually changes: re-writing identical
+      // content into a role="alert" makes screen readers announce it again.
       if (msg) {
         field.classList.add('invalid');
-        if (errEl) errEl.textContent = msg;
+        if (errEl && errEl.textContent !== msg) errEl.textContent = msg;
         form.querySelector('[name="' + name + '"]').setAttribute('aria-invalid', 'true');
       } else {
         field.classList.remove('invalid');
-        if (errEl) errEl.textContent = '';
+        if (errEl && errEl.textContent !== '') errEl.textContent = '';
         form.querySelector('[name="' + name + '"]').removeAttribute('aria-invalid');
       }
     }
@@ -238,23 +256,35 @@
     });
   }
 
-  /* ---------- Cookie consent + policy modal ---------- */
+  /* ---------- Cookie consent + accessible dialogs ---------- */
   var CONSENT_KEY = 'bc-cookie-consent';
   var banner = document.getElementById('cookieBanner');
   var acceptBtn = document.getElementById('cookieAccept');
-  var modal = document.getElementById('cookieModal');
-  var modalClose = document.getElementById('cookieModalClose');
-  var lastFocused = null;
 
   function consentStored() {
     try { return !!localStorage.getItem(CONSENT_KEY); } catch (e) { return false; }
   }
+  // Reserve page space equal to the banner so it never sits entirely on top of
+  // a focused control at the bottom of the document (WCAG 2.2 — 2.4.11).
+  function reserveBannerSpace() {
+    if (!banner || banner.hidden) return;
+    var h = banner.getBoundingClientRect().height;
+    var gap = parseFloat(getComputedStyle(banner).bottom) || 0;
+    root.style.setProperty('--cookie-banner-h', Math.ceil(h + gap * 2) + 'px');
+  }
   function showBanner() {
-    if (banner) banner.hidden = false;
+    if (!banner) return;
+    banner.hidden = false;
+    document.body.classList.add('has-cookie-banner');
+    reserveBannerSpace();
+    window.addEventListener('resize', reserveBannerSpace, { passive: true });
   }
   function hideBanner() {
     if (!banner) return;
     banner.classList.add('is-hiding');
+    document.body.classList.remove('has-cookie-banner');
+    root.style.removeProperty('--cookie-banner-h');
+    window.removeEventListener('resize', reserveBannerSpace);
     var done = function () { banner.hidden = true; banner.classList.remove('is-hiding'); banner.removeEventListener('transitionend', done); };
     if (prefersReduced) done();
     else { banner.addEventListener('transitionend', done); setTimeout(done, 600); }
@@ -267,53 +297,138 @@
   if (banner && !consentStored()) showBanner();
   if (acceptBtn) acceptBtn.addEventListener('click', acceptConsent);
 
-  // Modal open/close with focus management
-  function getFocusable() {
-    if (!modal) return [];
-    return Array.prototype.slice.call(
-      modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
-    ).filter(function (el) { return el.offsetParent !== null; });
-  }
-  function openModal() {
-    if (!modal) return;
-    lastFocused = document.activeElement;
-    modal.hidden = false;
-    // force reflow so the transition runs from the hidden state
-    void modal.offsetWidth;
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    if (modalClose) modalClose.focus();
-  }
-  function closeModal() {
-    if (!modal || modal.hidden) return;
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-    var done = function () { modal.hidden = true; modal.removeEventListener('transitionend', done); };
-    if (prefersReduced) done();
-    else { modal.addEventListener('transitionend', done); setTimeout(done, 350); }
-    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-  }
+  /* Generic modal dialog controller.
+     Any number of dialogs: a trigger carries data-modal-open="<overlay id>",
+     any close button inside carries data-modal-close. Handles focus move,
+     focus trapping, Escape, backdrop click, focus restore, and marks the rest
+     of the page inert so assistive tech cannot wander behind the dialog. */
+  var openDialog = null;
+  var lastFocused = null;
+  // Siblings of the dialogs that must be neutralised while one is open.
+  var pageRegions = Array.prototype.slice.call(
+    document.querySelectorAll('.site-header, main, .site-footer, .back-to-top, .cookie-banner')
+  );
 
-  Array.prototype.slice.call(document.querySelectorAll('[data-cookie-open]')).forEach(function (btn) {
-    btn.addEventListener('click', openModal);
-  });
-  if (modalClose) modalClose.addEventListener('click', closeModal);
-  if (modal) {
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) closeModal(); // click on backdrop
+  function setPageInert(on) {
+    pageRegions.forEach(function (el) {
+      if (on) {
+        el.setAttribute('inert', '');
+        el.setAttribute('aria-hidden', 'true');
+      } else {
+        el.removeAttribute('inert');
+        el.removeAttribute('aria-hidden');
+      }
     });
   }
-  document.addEventListener('keydown', function (e) {
-    if (!modal || modal.hidden) return;
-    if (e.key === 'Escape') { closeModal(); return; }
-    if (e.key === 'Tab') {
-      var f = getFocusable();
-      if (!f.length) return;
-      var first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
+
+  function focusableIn(overlay) {
+    return Array.prototype.slice.call(
+      overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    ).filter(function (el) { return el.offsetParent !== null || el === document.activeElement; });
+  }
+
+  function openModal(overlay) {
+    if (!overlay || openDialog === overlay) return;
+    if (openDialog) closeModal(true);
+    lastFocused = document.activeElement;
+    openDialog = overlay;
+    overlay.hidden = false;
+    // force reflow so the transition runs from the hidden state
+    void overlay.offsetWidth;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setPageInert(true);
+    var closeBtn = overlay.querySelector('[data-modal-close]');
+    var first = closeBtn || focusableIn(overlay)[0];
+    if (first) first.focus();
+  }
+
+  function closeModal(skipFocusRestore) {
+    var overlay = openDialog;
+    if (!overlay) return;
+    openDialog = null;
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setPageInert(false);
+    var done = function () { overlay.hidden = true; overlay.removeEventListener('transitionend', done); };
+    if (prefersReduced) done();
+    else { overlay.addEventListener('transitionend', done); setTimeout(done, 350); }
+    // Focus has to go back where it came from, or keyboard users are dumped at
+    // the top of the document (WCAG 2.4.3 Focus Order).
+    if (!skipFocusRestore && lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('[data-modal-open]')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openModal(document.getElementById(btn.getAttribute('data-modal-open')));
+    });
   });
+  Array.prototype.slice.call(document.querySelectorAll('[data-modal-close]')).forEach(function (btn) {
+    btn.addEventListener('click', function () { closeModal(); });
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.modal-overlay')).forEach(function (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal(); // click on backdrop
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!openDialog) return;
+    if (e.key === 'Escape') { e.stopPropagation(); closeModal(); return; }
+    if (e.key !== 'Tab') return;
+    var f = focusableIn(openDialog);
+    if (!f.length) { e.preventDefault(); return; }
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    else if (!openDialog.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+  }, true);
+
+  /* ---------- 2.4.11 Focus Not Obscured: safety net ----------
+     The header is fixed at the top and the cookie banner is fixed at the bottom.
+     On short viewports either can end up completely covering whatever has just
+     received focus. Scroll the focused element into the clear band between them. */
+  (function guardFocusVisibility() {
+    var scrolling = false;
+    function overlayRects() {
+      var rects = [];
+      [header, banner, backToTop].forEach(function (el) {
+        if (!el || el.hidden) return;
+        var cs = getComputedStyle(el);
+        if (cs.position !== 'fixed' || cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return;
+        rects.push(el.getBoundingClientRect());
+      });
+      return rects;
+    }
+    function coveredBy(rect, o) {
+      return o.top <= rect.top && o.bottom >= rect.bottom && o.left <= rect.left && o.right >= rect.right;
+    }
+    document.addEventListener('focusin', function (e) {
+      var el = e.target;
+      if (scrolling || !el || typeof el.getBoundingClientRect !== 'function') return;
+      if (el === document.body || el.closest('.modal-overlay')) return;
+      var overlays = overlayRects();
+      if (!overlays.length) return;
+      var r = el.getBoundingClientRect();
+      if (!r.height) return;
+      var hidden = overlays.some(function (o) { return coveredBy(r, o); });
+      if (!hidden) return;
+
+      // Work out the band that no fixed overlay occupies, and put the element in it.
+      var topGuard = 0, bottomGuard = window.innerHeight;
+      overlays.forEach(function (o) {
+        if (o.top <= 0) topGuard = Math.max(topGuard, o.bottom);
+        if (o.bottom >= window.innerHeight - 1) bottomGuard = Math.min(bottomGuard, o.top);
+      });
+      var band = bottomGuard - topGuard;
+      var targetTop = band > r.height
+        ? topGuard + (band - r.height) / 2      // centre it in the clear band
+        : topGuard + 8;                          // band is tight: sit just below the header
+      scrolling = true;
+      window.scrollBy({ top: r.top - targetTop, behavior: prefersReduced ? 'auto' : 'smooth' });
+      setTimeout(function () { scrolling = false; }, prefersReduced ? 0 : 400);
+    });
+  })();
 
   /* ---------- Carousels: auto-scroll RTL + drag/swipe (testimonials + events) ---------- */
   (function initCarousels() {
@@ -336,8 +451,9 @@
       originals.forEach(function (node) {
         var clone = node.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
+        clone.setAttribute('inert', '');
         clone.setAttribute('tabindex', '-1');
-        Array.prototype.forEach.call(clone.querySelectorAll('a, [tabindex]'), function (el) {
+        Array.prototype.forEach.call(clone.querySelectorAll('a, button, input, [tabindex]'), function (el) {
           el.setAttribute('tabindex', '-1');
         });
         track.appendChild(clone);
@@ -362,14 +478,35 @@
     var startW = loopWidth();
     if (startW > 0) vp.scrollLeft = startW;
 
-    var paused = false;        // hover / focus
+    var paused = false;        // transient: hover / focus
+    var stopped = prefersReduced; // sticky: the user pressed Pause (or asked for reduced motion)
     var dragging = false;      // mouse drag in progress
     var userUntil = 0;         // brief yield after wheel/touch/arrow
     var SPEED = 1.0;           // px per frame — continuous drift, right to left (~60px/s)
     var pos = vp.scrollLeft || 0; // float accumulator (scrollLeft is rounded to int on read)
 
     function autoActive() {
-      return !prefersReduced && !paused && !dragging && Date.now() > userUntil;
+      return !stopped && !paused && !dragging && Date.now() > userUntil;
+    }
+
+    /* Explicit pause/play control — WCAG 2.2.2 requires a mechanism to stop
+       motion that starts automatically and runs for more than five seconds.
+       Hover/focus pausing is not a mechanism the user can find or operate. */
+    var toggleBtn = wrap && wrap.querySelector('[data-carousel-toggle]');
+    if (toggleBtn) {
+      var toggleLabel = toggleBtn.querySelector('[data-carousel-toggle-label]');
+      var labelBase = (toggleLabel ? toggleLabel.textContent : 'auto-scroll').replace(/^Pause\s+/i, '');
+      function renderToggle() {
+        // aria-pressed=true means "paused" — the button is a Pause that is engaged.
+        toggleBtn.setAttribute('aria-pressed', String(stopped));
+        if (toggleLabel) toggleLabel.textContent = (stopped ? 'Play ' : 'Pause ') + labelBase;
+      }
+      toggleBtn.addEventListener('click', function () {
+        stopped = !stopped;
+        if (!stopped) pos = vp.scrollLeft;
+        renderToggle();
+      });
+      renderToggle();
     }
     function tick() {
       if (autoActive()) {
