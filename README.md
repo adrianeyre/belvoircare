@@ -11,20 +11,38 @@ event medical cover across the UK since 2012.
 - **Standout animations** — animated EKG line & glows in the hero, count-up stats, scroll-reveal
   sections, an animated "Shrimpy" mascot, hover micro-interactions, and a sticky/shrinking header.
   All motion respects `prefers-reduced-motion`.
-- **Accessible** — WCAG-minded contrast, visible focus rings, skip link, semantic headings,
-  ARIA labels, keyboard-friendly nav, 44px+ touch targets, and form errors announced politely.
+- **Accessible — WCAG 2.2 Level AA.** Verified with axe-core across light/dark themes at 1440px,
+  390px and 320px, plus scripted checks for the criteria axe cannot see. Highlights: AA contrast in
+  both themes (3:1 for borders, icons and focus rings), a visible focus outline that is never hidden
+  behind the fixed header, keyboard access to every control, pause/play buttons on the auto-scrolling
+  strips, carousel arrows at all widths so nothing needs dragging, 24px+ targets, reflow to 320px,
+  form errors wired to their fields and announced, and focus-trapped dialogs that restore focus.
+  The footer's **Accessibility** link opens the accessibility statement.
 - **No build step / no dependencies** — plain HTML, CSS and vanilla JS. Fonts from Google Fonts.
 - The contact form composes a pre-filled email to `events@belvoircare.com` (no backend required).
 
 ## Structure
 
 ```
-index.html          # markup + content + SEO/structured data
+index.html          # markup + content + SEO/structured data + cookie/accessibility dialogs
 assets/
   styles.css        # design tokens, theming, layout, animations
-  script.js         # theme, nav, scroll reveal, counters, scrollspy, form
+  script.js         # theme, nav, scroll reveal, counters, scrollspy, form, dialogs, carousels
   favicon.svg       # brand mark
 ```
+
+### Accessibility notes for future edits
+
+- `--border` is for decorative dividers; use `--border-strong` for anything interactive — it is the
+  token that meets the 3:1 non-text contrast requirement.
+- `--accent-ink` is the readable amber for text; plain `--accent` is a decorative fill and does not
+  meet 4.5:1 on light surfaces.
+- Links inside `<p>` and `<li>` are underlined on purpose (WCAG 1.4.1) — opt out only for links that
+  are already visually distinct, via the exception list next to the `a` rule.
+- Anything fixed to the top or bottom of the viewport must not be able to cover a focused control;
+  see `scroll-padding-top`, the footer's bottom padding, and the focus guard in `script.js`.
+- New dialogs need only `class="modal-overlay"` with an id, a `[data-modal-close]` button, and a
+  trigger carrying `data-modal-open="<id>"`; the controller handles focus, Escape and inerting.
 
 ## News / Facebook posts
 

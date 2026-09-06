@@ -16,9 +16,9 @@
   --accent: #ee9635;        /* logo amber */
   --accent-600: #d97e1e;    /* deeper amber — accent button hover */
   --accent-700: #b9650f;    /* deep amber — gradient text end */
-  --accent-ink: #a85e0c;    /* readable amber-brown for small accent text (AA on white) */
+  --accent-ink: #8f5006;    /* readable amber-brown for small accent text (AA on white, surface-2 and accent-soft) */
   --accent-soft: #fdeccd;   /* soft amber tint */
-  --on-accent: #1f3047;     /* navy ink on amber surfaces (AAA contrast) */
+  --on-accent: #16242f;     /* navy ink on amber surfaces (AA on both --accent and --accent-600) */
 
   /* Semantic — LIGHT (default) */
   --bg: #f6f8fb;
@@ -31,12 +31,17 @@
   --primary: var(--blue-700);
   --primary-hover: var(--blue-600);
   --on-primary: #ffffff;
-  --border: #d9e1ec;
+  --border: #d9e1ec;        /* decorative dividers / card outlines */
+  --border-strong: #748aa4; /* interactive component boundaries — >=3:1 (WCAG 1.4.11) */
   --ring: #4f7bb0;
+  --success: #15803d;
+  --danger: #b3261e;
   --shadow-sm: 0 1px 2px rgba(22, 36, 47, .07), 0 2px 8px rgba(22, 36, 47, .06);
   --shadow-md: 0 8px 24px rgba(22, 36, 47, .11);
   --shadow-lg: 0 24px 60px rgba(22, 36, 47, .17);
-  --glass-bg: rgba(255, 255, 255, .65);
+  /* Glass panels sit over photos and page content — kept opaque enough that the
+     text inside always clears 4.5:1 whatever is behind them (WCAG 1.4.3). */
+  --glass-bg: rgba(255, 255, 255, .88);
   --glass-brd: rgba(255, 255, 255, .8);
 
   /* Type */
@@ -70,11 +75,14 @@
   --primary-hover: #9abde0;
   --on-primary: #0b1622;
   --border: #243a54;
+  --border-strong: #5a7ea6;
   --ring: #7ba8e0;
+  --success: #4ade80;
+  --danger: #ff9c92;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
   --shadow-md: 0 12px 30px rgba(0, 0, 0, .45);
   --shadow-lg: 0 28px 70px rgba(0, 0, 0, .6);
-  --glass-bg: rgba(19, 36, 58, .6);
+  --glass-bg: rgba(19, 36, 58, .9);
   --glass-brd: rgba(123, 166, 212, .16);
   --accent-ink: #f5b461;          /* light amber for small accent text on dark */
   --accent-soft: rgba(238, 150, 53, .16);
@@ -83,15 +91,21 @@
 /* ---------- Reset / base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth; -webkit-text-size-adjust: 100%;
+  /* The header is fixed, so in-page targets must clear it or focus lands hidden
+     underneath it (WCAG 2.2 — 2.4.11 Focus Not Obscured). */
+  scroll-padding-top: calc(var(--header-h) + 1.25rem);
+}
 html:focus-within { scroll-behavior: smooth; }
+:target, main, section[id] { scroll-margin-top: calc(var(--header-h) + 1.25rem); }
 
 body {
   font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   line-height: 1.65;
-  font-size: 16px;
+  font-size: 100%;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -100,6 +114,11 @@ body {
 
 h1, h2, h3, h4 { font-family: var(--font-head); color: var(--heading); line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
 a { color: var(--primary); text-decoration: none; }
+/* Inline links in prose are underlined so they are not identified by colour
+   alone (WCAG 1.4.1). Standalone links that are already visually distinct —
+   buttons, nav items, icon links — opt out below. */
+p a, li a, dd a { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: from-font; }
+p a.btn, li a.btn, p a.design-credit, .post-seeall a, .footer-nav a, .nav-links a, .contact-list a { text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
 ul, ol { list-style: none; padding: 0; }
 
@@ -108,6 +127,8 @@ ul, ol { list-style: none; padding: 0; }
   outline-offset: 3px;
   border-radius: 4px;
 }
+/* Skip-link and modal targets are focused by script; never show a ring there. */
+main:focus, [tabindex="-1"]:focus { outline: none; }
 
 .container { width: min(100% - 2.5rem, var(--maxw)); margin-inline: auto; }
 
@@ -145,7 +166,7 @@ ul, ol { list-style: none; padding: 0; }
 
 .btn-ghost {
   background: transparent; color: var(--text);
-  border-color: var(--border); box-shadow: none;
+  border-color: var(--border-strong); box-shadow: none;
 }
 .btn-ghost:hover { background: var(--surface-2); border-color: var(--primary); }
 
@@ -183,13 +204,13 @@ ul, ol { list-style: none; padding: 0; }
 }
 .nav-links a:hover { color: var(--heading); background: var(--surface-2); }
 .nav-links a.active { color: var(--primary); }
-.nav-links a.active::after { content: ""; position: absolute; left: .8rem; right: .8rem; bottom: .25rem; height: 2px; border-radius: 2px; background: var(--accent); }
+.nav-links a.active::after { content: ""; position: absolute; left: .8rem; right: .8rem; bottom: .25rem; height: 3px; border-radius: 2px; background: var(--accent-ink); }
 
 .nav-actions { display: flex; align-items: center; gap: .6rem; }
 
 .theme-toggle {
   width: 44px; height: 44px; display: grid; place-items: center;
-  border-radius: 11px; border: 1px solid var(--border); background: var(--surface);
+  border-radius: 11px; border: 1px solid var(--border-strong); background: var(--surface);
   color: var(--text); cursor: pointer; transition: background-color .2s, transform .2s, border-color .2s;
 }
 .theme-toggle:hover { transform: translateY(-1px); border-color: var(--primary); }
@@ -199,7 +220,7 @@ ul, ol { list-style: none; padding: 0; }
 .theme-toggle[data-mode="dark"] .icon-moon,
 .theme-toggle[data-mode="system"] .icon-system { opacity: 1; transform: scale(1) rotate(0); position: relative; }
 
-.menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--border); background: var(--surface); border-radius: 11px; cursor: pointer; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
+.menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--border-strong); background: var(--surface); border-radius: 11px; cursor: pointer; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
 .menu-toggle span { width: 20px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .3s var(--ease-out), opacity .2s; }
 .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
@@ -268,7 +289,8 @@ ul, ol { list-style: none; padding: 0; }
 .section-title { font-size: clamp(1.8rem, 4vw, 2.7rem); }
 .section-intro { color: var(--text-muted); font-size: 1.08rem; margin-top: .8rem; }
 
-.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.two-col { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.two-col > * { min-width: 0; }
 .two-col.reverse .col-media { order: -1; }
 .lead { font-size: 1.2rem; color: var(--text); margin: 1rem 0; font-weight: 500; }
 .col-text p { color: var(--text-muted); margin-bottom: 1rem; }
@@ -281,7 +303,7 @@ ul, ol { list-style: none; padding: 0; }
 /* Feature card */
 .feature-card { padding: 2rem; border-radius: var(--radius-lg); }
 .glass { background: var(--glass-bg); border: 1px solid var(--glass-brd); box-shadow: var(--shadow-md); backdrop-filter: blur(10px); }
-.feature-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue-700), var(--accent)); color: #fff; margin-bottom: 1rem; }
+.feature-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue-700), var(--accent-700)); color: #fff; margin-bottom: 1rem; }
 .feature-card h3 { font-size: 1.3rem; margin-bottom: .5rem; }
 .feature-card p { color: var(--text-muted); }
 .mini-stats { display: flex; gap: 1.5rem; margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
@@ -318,11 +340,14 @@ ul, ol { list-style: none; padding: 0; }
 
 /* Shrimpy */
 .section-shrimpy { background: radial-gradient(120% 90% at 80% 10%, var(--accent-soft), transparent 60%); }
-.shrimpy-stage { position: relative; display: grid; place-items: center; padding: 2rem; }
+/* Explicit minmax(0,1fr) column: with place-items:center alone the grid area is
+   content-sized, so max-width:100% on the photo has nothing to resolve against
+   and the figure overflows narrow viewports (WCAG 1.4.10 Reflow). */
+.shrimpy-stage { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; align-items: center; padding: 2rem clamp(0px, 4vw, 2rem); min-width: 0; }
 .shrimpy-ring { position: absolute; width: 320px; height: 320px; max-width: 80vw; max-height: 80vw; border-radius: 50%; background: radial-gradient(circle, rgba(238,150,53,.18), transparent 65%); animation: pulseRing 4s ease-in-out infinite; }
 .shrimpy-photo {
   position: relative; margin: 0;
-  width: 360px; max-width: 82vw; aspect-ratio: 4 / 3;
+  width: 360px; max-width: 100%; aspect-ratio: 4 / 3;
   border-radius: var(--radius-lg); overflow: hidden;
   border: 4px solid var(--bg);
   box-shadow: var(--shadow-lg), 0 22px 44px rgba(238, 150, 53, .26);
@@ -334,7 +359,7 @@ ul, ol { list-style: none; padding: 0; }
 /* Steps */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; counter-reset: step; }
 .step { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.6rem 1.6rem; box-shadow: var(--shadow-sm); }
-.step-num { position: absolute; top: -22px; left: 1.6rem; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: linear-gradient(135deg, var(--blue-700), var(--accent)); color: #fff; font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; box-shadow: var(--shadow-md); }
+.step-num { position: absolute; top: -22px; left: 1.6rem; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: linear-gradient(135deg, var(--blue-700), var(--accent-700)); color: #fff; font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; box-shadow: var(--shadow-md); }
 .step h3 { margin: .8rem 0 .5rem; font-size: 1.2rem; }
 .step p { color: var(--text-muted); font-size: .97rem; }
 
@@ -344,7 +369,7 @@ ul, ol { list-style: none; padding: 0; }
 .wb-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
 .wb-check { display: flex; align-items: flex-start; gap: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; box-shadow: var(--shadow-sm); transition: transform .3s var(--ease-out), box-shadow .3s, border-color .3s; }
 .wb-check:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--blue-300); }
-.wb-ic { flex-shrink: 0; width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue-700), var(--accent)); color: #fff; }
+.wb-ic { flex-shrink: 0; width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue-700), var(--accent-700)); color: #fff; }
 .wb-check h3 { font-size: 1.1rem; margin-bottom: .2rem; }
 .wb-check p { color: var(--text-muted); font-size: .94rem; }
 
@@ -378,7 +403,7 @@ ul, ol { list-style: none; padding: 0; }
 .contact-list a:hover { color: var(--primary); }
 
 .social { display: flex; gap: .8rem; }
-.social-btn { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 13px; background: var(--surface); border: 1px solid var(--border); color: var(--text); transition: transform .25s var(--ease-spring), color .25s, border-color .25s, background-color .25s; }
+.social-btn { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 13px; background: var(--surface); border: 1px solid var(--border-strong); color: var(--text); transition: transform .25s var(--ease-spring), color .25s, border-color .25s, background-color .25s; }
 .social-btn:hover { transform: translateY(-3px); color: #fff; background: var(--primary); border-color: var(--primary); }
 
 /* Form */
@@ -390,14 +415,20 @@ ul, ol { list-style: none; padding: 0; }
 .req { color: var(--accent-ink); }
 .field input, .field textarea {
   font-family: var(--font-body); font-size: 1rem; color: var(--text);
-  background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); border: 1.5px solid var(--border-strong); border-radius: var(--radius-sm);
   padding: .75rem .9rem; min-height: 46px; width: 100%; transition: border-color .2s, box-shadow .2s;
 }
 .field textarea { resize: vertical; min-height: 110px; }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ring) 18%, transparent); }
-.field input::placeholder, .field textarea::placeholder { color: var(--text-muted); opacity: .7; }
-.field.invalid input, .field.invalid textarea { border-color: var(--accent-600); }
-.error { color: var(--accent-ink); font-size: .84rem; margin-top: .35rem; min-height: 0; }
+.field input:focus, .field textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ring) 30%, transparent); }
+/* Keep the standard 3px ring for keyboard focus — the soft glow alone does not
+   meet the 3:1 focus-indicator contrast required by WCAG 1.4.11. */
+.field input:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.field input::placeholder, .field textarea::placeholder { color: var(--text-muted); opacity: 1; }
+.field.invalid input, .field.invalid textarea { border-color: var(--danger); }
+.error { color: var(--danger); font-size: .84rem; margin-top: .35rem; min-height: 0; font-weight: 600; }
+/* Empty errors stay in the DOM (not display:none) so role="alert" still fires
+   when they are filled in — they just take up no space. */
+.error:empty { height: 0; margin-top: 0; overflow: hidden; }
 
 .form-submit { width: 100%; margin-top: .4rem; position: relative; }
 .form-submit.loading .btn-label { opacity: 0; }
@@ -418,19 +449,23 @@ ul, ol { list-style: none; padding: 0; }
 .form-alert-body em { font-style: normal; font-weight: 600; color: var(--accent-ink); }
 
 .form-note { font-size: .85rem; color: var(--text-muted); margin-top: 1rem; }
-.form-success { margin-top: 1rem; color: #16a34a; font-weight: 600; font-family: var(--font-head); }
-.form-success:empty { display: none; }
+/* Live region: stays rendered (an empty p collapses to nothing) so screen
+   readers announce it when it is filled in — display:none would swallow it. */
+.form-success { margin-top: 1rem; color: var(--success); font-weight: 600; font-family: var(--font-head); }
+.form-success:empty { margin-top: 0; }
 
 /* Footer */
-.site-footer { background: var(--bg-elev); border-top: 1px solid var(--border); padding-top: 3rem; }
+/* The back-to-top button is fixed in the bottom-right corner; this padding keeps
+   the last interactive row clear of it (WCAG 2.2 — 2.4.11 Focus Not Obscured). */
+.site-footer { background: var(--bg-elev); border-top: 1px solid var(--border); padding-top: 3rem; padding-bottom: 4.5rem; }
 .footer-inner { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-bottom: 2rem; }
 .footer-brand p { color: var(--text-muted); margin-top: .6rem; max-width: 32ch; }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
-.footer-nav a { color: var(--text-muted); font-family: var(--font-head); font-weight: 500; }
+.footer-nav a { display: inline-flex; align-items: center; min-height: 24px; padding: .35rem .2rem; color: var(--text-muted); font-family: var(--font-head); font-weight: 500; }
 .footer-nav a:hover { color: var(--primary); }
 .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1.4rem; padding: 1.4rem 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .88rem; }
 .footer-meta { display: inline-flex; align-items: center; flex-wrap: wrap; gap: .5rem 1.1rem; }
-.design-credit { display: inline-flex; align-items: center; gap: .45rem; color: var(--text-muted); font-family: var(--font-head); font-weight: 600; padding: .35rem .2rem; border-radius: 8px; transition: color .2s, transform .2s; }
+.design-credit { display: inline-flex; align-items: center; gap: .45rem; min-height: 24px; color: var(--text-muted); font-family: var(--font-head); font-weight: 600; padding: .35rem .2rem; border-radius: 8px; transition: color .2s, transform .2s; }
 .design-credit svg { transition: transform .3s var(--ease-spring); }
 .design-credit:hover { color: var(--primary); }
 .design-credit:hover svg { transform: rotate(8deg) scale(1.12); }
@@ -480,9 +515,12 @@ ul, ol { list-style: none; padding: 0; }
     flex-direction: column; align-items: stretch; gap: 0;
     background: var(--bg-elev); border-bottom: 1px solid var(--border);
     padding: .5rem 1.25rem 1.25rem; box-shadow: var(--shadow-lg);
-    transform: translateY(-120%); transition: transform .4s var(--ease-out); z-index: 99;
+    transform: translateY(-120%); transition: transform .4s var(--ease-out), visibility .4s; z-index: 99;
+    /* visibility:hidden takes the closed menu out of the tab order — a purely
+       translated menu stays keyboard-focusable while off screen. */
+    visibility: hidden;
   }
-  .nav-links.open { transform: translateY(0); }
+  .nav-links.open { transform: translateY(0); visibility: visible; }
   .nav-links a { padding: .85rem .6rem; border-radius: 10px; font-size: 1.05rem; }
   .nav-links a.active::after { display: none; }
   .nav-links a.active { background: var(--surface-2); }
@@ -514,11 +552,13 @@ ul, ol { list-style: none; padding: 0; }
   position: absolute; left: 0; right: 0; bottom: 0;
   padding: 1.6rem 1.2rem .95rem;
   color: #fff; font-family: var(--font-head); font-weight: 600; font-size: .95rem;
-  background: linear-gradient(to top, rgba(4, 12, 24, .85), rgba(4, 12, 24, .35) 55%, transparent);
+  /* Scrim is opaque enough behind the text band that white keeps >=4.5:1 even
+     over a pure-white photo (WCAG 1.4.3). */
+  background: linear-gradient(to top, rgba(4, 12, 24, .94), rgba(4, 12, 24, .86) 45%, rgba(4, 12, 24, .62) 82%, transparent);
 }
 .media-cap-lg { padding-top: 2.4rem; }
 .media-cap-lg strong { display: block; font-size: clamp(1.15rem, 2.4vw, 1.5rem); font-weight: 800; margin-bottom: .25rem; }
-.media-cap-lg span { display: block; font-weight: 500; color: rgba(255, 255, 255, .86); }
+.media-cap-lg span { display: block; font-weight: 500; color: rgba(255, 255, 255, .94); }
 
 /* About — team photo collage with floating glass stat badge */
 .about-media { position: relative; padding-right: clamp(0px, 5vw, 2.4rem); padding-bottom: 2.4rem; }
@@ -562,11 +602,11 @@ ul, ol { list-style: none; padding: 0; }
 .cta-band-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 66%; z-index: -2; }
 .cta-band::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(100deg, rgba(6, 16, 32, .9), rgba(13, 28, 44, .66) 55%, rgba(52, 81, 109, .58));
+  background: linear-gradient(100deg, rgba(6, 16, 32, .93), rgba(10, 22, 38, .88) 55%, rgba(20, 38, 58, .86));
 }
 .cta-band-inner { text-align: center; max-width: 680px; }
 .cta-band h2 { color: #fff; font-size: clamp(1.9rem, 4.5vw, 2.8rem); }
-.cta-band p { color: rgba(255, 255, 255, .9); font-size: clamp(1.05rem, 2vw, 1.2rem); margin: 1rem auto 1.9rem; max-width: 56ch; }
+.cta-band p { color: rgba(255, 255, 255, .94); font-size: clamp(1.05rem, 2vw, 1.2rem); margin: 1rem auto 1.9rem; max-width: 56ch; }
 
 @media (max-width: 680px) {
   .fleet-gallery { grid-template-columns: 1fr; }
@@ -579,7 +619,7 @@ ul, ol { list-style: none; padding: 0; }
 }
 
 /* ---------- Testimonial carousel (Facebook recommendations) ---------- */
-.tcarousel { position: relative; }
+.tcarousel { position: relative; --tc-controls-h: 47px; }
 .tcarousel-viewport {
   display: flex; overflow-x: auto; overflow-y: hidden;
   -webkit-overflow-scrolling: touch; cursor: grab;
@@ -590,6 +630,7 @@ ul, ol { list-style: none; padding: 0; }
 }
 .tcarousel-viewport::-webkit-scrollbar { display: none; }
 .tcarousel-viewport.dragging { cursor: grabbing; }
+.tcarousel-viewport:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: var(--radius); }
 /* Let touch swipe scroll horizontally while the page still scrolls vertically,
    and stop images from being "grabbed" (native drag) instead of scrolling. */
 .tcarousel-viewport { touch-action: pan-x pan-y; }
@@ -645,9 +686,10 @@ ul, ol { list-style: none; padding: 0; }
 
 /* Prev / next controls (keyboard + click alternative to drag/swipe) */
 .tcarousel-arrow {
-  position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+  /* centred on the scrolling strip, discounting the controls row underneath */
+  position: absolute; top: calc((100% - var(--tc-controls-h)) / 2); transform: translateY(-50%); z-index: 5;
   width: 46px; height: 46px; display: grid; place-items: center;
-  border-radius: 50%; border: 1px solid var(--border);
+  border-radius: 50%; border: 1px solid var(--border-strong);
   background: var(--surface); color: var(--heading); cursor: pointer;
   box-shadow: var(--shadow-md);
   transition: background-color .2s, color .2s, border-color .2s, transform .2s, opacity .2s;
@@ -657,12 +699,33 @@ ul, ol { list-style: none; padding: 0; }
 .tcarousel-prev { left: -10px; }
 .tcarousel-next { right: -10px; }
 
+/* Auto-scroll play/pause control (WCAG 2.2.2 Pause, Stop, Hide) */
+.tcarousel-controls { display: flex; justify-content: center; margin-top: .2rem; }
+.tcarousel-toggle {
+  display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap;
+  min-height: 44px; padding: .5rem 1.1rem;
+  border-radius: 999px; border: 1px solid var(--border-strong);
+  background: var(--surface); color: var(--text);
+  font-family: var(--font-head); font-weight: 600; font-size: .9rem;
+  cursor: pointer; box-shadow: var(--shadow-sm);
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+.tcarousel-toggle:hover { background: var(--surface-2); border-color: var(--primary); }
+.tcarousel-toggle svg { flex-shrink: 0; }
+.tcarousel-toggle .icon-pause { display: block; }
+.tcarousel-toggle .icon-play { display: none; }
+.tcarousel-toggle[aria-pressed="true"] .icon-pause { display: none; }
+.tcarousel-toggle[aria-pressed="true"] .icon-play { display: block; }
+
 .review-note { text-align: center; margin-top: 1.6rem; font-size: .92rem; color: var(--text-muted); }
 .review-note a { font-weight: 600; }
 
-/* On touch-first widths, hide arrows (swipe/drag is the natural affordance) */
+/* Below 760px the arrows tuck inside the viewport rather than disappearing:
+   they are the single-pointer alternative to swiping (WCAG 2.2 — 2.5.7). */
 @media (max-width: 760px) {
-  .tcarousel-arrow { display: none; }
+  .tcarousel-arrow { width: 42px; height: 42px; }
+  .tcarousel-prev { left: 2px; }
+  .tcarousel-next { right: 2px; }
   .tcarousel-track { gap: 1rem; }
 }
 
@@ -739,6 +802,9 @@ ul, ol { list-style: none; padding: 0; }
   transition: opacity .4s var(--ease-out), transform .5s var(--ease-spring);
 }
 .cookie-banner[hidden] { display: none; }
+/* While the banner is on screen, push the document up by its height so it never
+   fully covers a focused element underneath (WCAG 2.2 — 2.4.11). */
+body.has-cookie-banner { padding-bottom: var(--cookie-banner-h, 0px); }
 .cookie-banner.is-hiding { opacity: 0; transform: translateX(-50%) translateY(16px); pointer-events: none; }
 .cookie-ic { flex-shrink: 0; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); }
 .cookie-body { flex: 1; min-width: 0; }
@@ -774,7 +840,7 @@ ul, ol { list-style: none; padding: 0; }
 .modal-head h2 { font-size: 1.4rem; }
 .modal-close {
   flex-shrink: 0; width: 40px; height: 40px; display: grid; place-items: center;
-  border-radius: 11px; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  border-radius: 11px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text);
   cursor: pointer; transition: background-color .2s, border-color .2s, transform .2s;
 }
 .modal-close:hover { background: var(--surface-2); border-color: var(--primary); transform: rotate(90deg); }
@@ -783,6 +849,25 @@ ul, ol { list-style: none; padding: 0; }
 .modal-body h3:first-child { margin-top: 0; }
 .modal-body p { color: var(--text-muted); font-size: .95rem; margin-bottom: .8rem; }
 .modal-body a { font-weight: 600; }
+.modal-body ul { list-style: disc; padding-left: 1.3rem; margin: 0 0 .9rem; color: var(--text-muted); font-size: .95rem; }
+.modal-body ul li { margin-bottom: .4rem; }
+.modal-body ul li::marker { color: var(--accent-ink); }
+.modal-body dl { margin: 0 0 .9rem; }
+.modal-body dt { font-family: var(--font-head); font-weight: 700; color: var(--heading); font-size: .95rem; margin-top: .7rem; }
+.modal-body dd { margin: .15rem 0 0; color: var(--text-muted); font-size: .95rem; }
+
+/* Conformance callout at the top of the accessibility statement */
+.a11y-status {
+  display: flex; align-items: flex-start; gap: .8rem;
+  padding: .9rem 1.05rem; margin-bottom: 1.3rem;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+.a11y-status svg { flex-shrink: 0; color: var(--accent-ink); margin-top: .15rem; }
+.a11y-status p { margin: 0; color: var(--heading); font-size: .93rem; line-height: 1.55; }
+.a11y-status strong { font-family: var(--font-head); color: var(--accent-ink); }
 .policy-updated { font-size: .85rem; color: var(--text-muted); margin-bottom: 1.4rem; }
 
 .cookie-table { width: 100%; border-collapse: collapse; margin: .4rem 0 .8rem; font-size: .88rem; }
@@ -792,18 +877,35 @@ ul, ol { list-style: none; padding: 0; }
 .cookie-table td { color: var(--text-muted); }
 .cookie-table td code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: .85em; color: var(--text); background: var(--surface-2); padding: .1rem .35rem; border-radius: 6px; }
 .cookie-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.cookie-table-scroll:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: 6px; }
 
 /* Footer legal link */
+/* >=24x24 CSS px of target (WCAG 2.2 — 2.5.8 Target Size (Minimum)) */
 .footer-legal-link {
-  background: none; border: none; padding: 0; cursor: pointer;
+  background: none; border: none; padding: .35rem .2rem; cursor: pointer;
+  display: inline-flex; align-items: center; min-height: 24px;
   font-family: var(--font-head); font-weight: 600; font-size: inherit; color: var(--text-muted);
   transition: color .2s;
 }
 .footer-legal-link:hover { color: var(--primary); }
 
 @media (max-width: 560px) {
-  .cookie-banner { flex-direction: column; gap: .8rem; }
+  /* Stay a row and tighten up: a tall banner can entirely cover a focused
+     control on a short viewport (WCAG 2.2 — 2.4.11 Focus Not Obscured). */
+  .cookie-banner { gap: .75rem; padding: .85rem .95rem; }
+  .cookie-ic { width: 32px; height: 32px; border-radius: 9px; }
+  .cookie-ic svg { width: 18px; height: 18px; }
+  .cookie-text { font-size: .85rem; line-height: 1.45; }
+  .cookie-actions { margin-top: .7rem; gap: .5rem; }
   .cookie-actions .btn { flex: 1; }
+}
+@media (max-width: 400px) {
+  .cookie-ic { display: none; }
+}
+/* Very short viewports: cap the banner and let its text scroll instead of
+   letting it grow over the page. */
+@media (max-height: 700px) {
+  .cookie-banner { max-height: 45vh; overflow-y: auto; }
 }
 
 /* ---------- Reduced motion ---------- */
