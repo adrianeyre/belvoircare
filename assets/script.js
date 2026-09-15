@@ -585,4 +585,51 @@
     if (prevBtn) prevBtn.addEventListener('click', function () { nudge(1); });
     if (nextBtn) nextBtn.addEventListener('click', function () { nudge(-1); });
   }
+
+  /* ---------- Equipment explanations (ARIA tabs) ----------
+     Each equipment tag is a tab; its explanation is the panel below.
+     Pointer users get it on hover, keyboard users on focus/arrow keys,
+     touch users on tap, and screen readers via the tab/tabpanel roles.
+     One tab is always selected, so the explanation is never empty and the
+     content does not obscure anything (WCAG 1.4.13 hover/focus content). */
+  var equipTabs = document.querySelector('[data-equip-tabs]');
+  if (equipTabs) {
+    var tabs = [].slice.call(equipTabs.querySelectorAll('[role="tab"]'));
+
+    function panelFor(tab) {
+      return document.getElementById(tab.getAttribute('aria-controls'));
+    }
+    function select(tab, moveFocus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        var panel = panelFor(t);
+        if (panel) panel.hidden = !on;
+      });
+      if (moveFocus) tab.focus();
+    }
+    // True while keyboard focus sits on a tag: hovering must not then fight
+    // the focused tab for the selection.
+    function focusInList() {
+      return equipTabs.contains(document.activeElement);
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab, true); });
+      tab.addEventListener('mouseenter', function () {
+        if (!focusInList()) select(tab, false);
+      });
+      tab.addEventListener('keydown', function (e) {
+        var next = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = tabs[(i + 1) % tabs.length];
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (e.key === 'Home') next = tabs[0];
+        else if (e.key === 'End') next = tabs[tabs.length - 1];
+        if (!next) return;
+        e.preventDefault();
+        select(next, true);
+      });
+    });
+  }
 })();
