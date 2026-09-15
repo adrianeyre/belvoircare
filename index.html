@@ -236,6 +236,17 @@
     ]
   }
   </script>
+
+  <!-- Without JavaScript the equipment tags cannot switch panels, so every
+       explanation is shown at once rather than only the first. -->
+  <noscript>
+    <style>
+      .equip-hint { display: none; }
+      .equip-detail { flex-direction: column; align-items: center; gap: .8rem; }
+      .equip-panel[hidden] { display: block; }
+      .tag-btn { cursor: default; }
+    </style>
+  </noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -485,12 +496,52 @@
         </div>
 
         <div class="equip reveal" data-reveal>
-          <h3 class="equip-title">Treatment facility equipment we supply</h3>
-          <ul class="tag-list">
-            <li>Room dividers</li><li>Treatment beds</li><li>Patient monitors</li>
-            <li>Portable sinks</li><li>Tables &amp; chairs</li><li>Shelving</li>
-            <li>Artificial lighting</li><li>Heating</li>
+          <h3 class="equip-title" id="equipTitle">Treatment facility equipment we supply</h3>
+          <p class="equip-hint">Hover over, or select, an item to read what it is and how we use it.</p>
+          <ul class="tag-list" role="tablist" aria-labelledby="equipTitle" data-equip-tabs>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-dividers" aria-controls="equip-panel-dividers" aria-selected="true" tabindex="0">Room dividers</button></li>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-beds" aria-controls="equip-panel-beds" aria-selected="false" tabindex="-1">Treatment beds</button></li>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-monitors" aria-controls="equip-panel-monitors" aria-selected="false" tabindex="-1">Patient monitors</button></li>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-sinks" aria-controls="equip-panel-sinks" aria-selected="false" tabindex="-1">Portable sinks</button></li>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-furniture" aria-controls="equip-panel-furniture" aria-selected="false" tabindex="-1">Tables &amp; chairs</button></li>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-shelving" aria-controls="equip-panel-shelving" aria-selected="false" tabindex="-1">Shelving</button></li>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-lighting" aria-controls="equip-panel-lighting" aria-selected="false" tabindex="-1">Artificial lighting</button></li>
+            <li role="presentation"><button type="button" class="tag-btn" role="tab" id="equip-tab-heating" aria-controls="equip-panel-heating" aria-selected="false" tabindex="-1">Heating</button></li>
           </ul>
+          <div class="equip-detail">
+            <div class="equip-panel" role="tabpanel" id="equip-panel-dividers" aria-labelledby="equip-tab-dividers" tabindex="0">
+              <h4>Room dividers</h4>
+              <p>Non-fixed and fully extendable room dividers allowing the separation of dedicated spaces. These are usually used to ensure all treatment bays are private, enabling us to promote patient privacy and dignity.</p>
+            </div>
+            <div class="equip-panel" role="tabpanel" id="equip-panel-beds" aria-labelledby="equip-tab-beds" tabindex="0" hidden>
+              <h4>Treatment beds</h4>
+              <p>Height-adjustable, wipe-clean couches and trolleys with lockable brakes and adjustable backrests, so a patient can be assessed and treated lying flat, sat up or in the recovery position. They give clinicians safe working height, keep the casualty off the ground, and fold down for rapid set-up and strike at the end of an event.</p>
+            </div>
+            <div class="equip-panel" role="tabpanel" id="equip-panel-monitors" aria-labelledby="equip-tab-monitors" tabindex="0" hidden>
+              <h4>Patient monitors</h4>
+              <p>Portable multi-parameter monitors recording heart rhythm and rate, oxygen saturation, blood pressure, respiratory rate and temperature at the bedside. Continuous observations let our clinicians spot a deteriorating patient early, evidence the decision to treat on site or convey, and hand a clear set of trended readings to the ambulance service or receiving hospital.</p>
+            </div>
+            <div class="equip-panel" role="tabpanel" id="equip-panel-sinks" aria-labelledby="equip-tab-sinks" tabindex="0" hidden>
+              <h4>Portable sinks</h4>
+              <p>Self-contained hand-wash units with heated running water, separate clean and waste tanks, liquid soap and paper towels, needing no mains plumbing. They allow proper hand hygiene between patients anywhere we set up — a field, a marquee or a warehouse floor — which is central to our infection prevention and control standards.</p>
+            </div>
+            <div class="equip-panel" role="tabpanel" id="equip-panel-furniture" aria-labelledby="equip-tab-furniture" tabindex="0" hidden>
+              <h4>Tables &amp; chairs</h4>
+              <p>Folding tables and stackable seating used to create a triage desk, a clean surface for preparing equipment and completing patient records, and a waiting area for walking wounded and the people with them. Seating a patient comfortably also frees our treatment beds for those who genuinely need to lie down.</p>
+            </div>
+            <div class="equip-panel" role="tabpanel" id="equip-panel-shelving" aria-labelledby="equip-tab-shelving" tabindex="0" hidden>
+              <h4>Shelving</h4>
+              <p>Free-standing racking and labelled storage that keeps dressings, consumables and medical gases organised, secure and off the floor. Everything has a known place, so kit can be found in seconds under pressure and stock levels can be checked and replenished throughout the event.</p>
+            </div>
+            <div class="equip-panel" role="tabpanel" id="equip-panel-lighting" aria-labelledby="equip-tab-lighting" tabindex="0" hidden>
+              <h4>Artificial lighting</h4>
+              <p>Bright, even LED lighting — mains, generator or battery powered — covering the treatment bays and the routes in and out of the facility. Good clinical light is essential after dark for assessing wounds, reading skin colour and drawing up medication accurately, and it keeps the working area safe for patients and staff alike.</p>
+            </div>
+            <div class="equip-panel" role="tabpanel" id="equip-panel-heating" aria-labelledby="equip-tab-heating" tabindex="0" hidden>
+              <h4>Heating</h4>
+              <p>Thermostatically controlled, safely sited portable heating that holds the treatment area at a comfortable clinical temperature whatever the weather outside. Keeping patients warm matters medically as well as for comfort: casualties who are wet, still or exposed lose heat quickly, and cold patients are at greater risk of shock and slower to recover.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1226,6 +1277,7 @@
           <li><strong>Contrast</strong> — all text meets at least 4.5:1 (3:1 for large text) against its background in both light and dark themes, and interactive borders, icons and focus indicators meet at least 3:1.</li>
           <li><strong>Motion</strong> — the photo and testimonial strips have a visible pause button, and every animation is switched off automatically if your device is set to <em>reduce motion</em>.</li>
           <li><strong>No dragging required</strong> — the carousels can be moved with the previous and next buttons at every screen size; swiping is optional.</li>
+          <li><strong>Nothing hidden behind hover</strong> — where extra detail appears on hover, such as the equipment explanations in our services section, the same detail can be reached by keyboard or by tapping, it stays on screen until you choose another item, and it never covers anything else.</li>
           <li><strong>Target sizes</strong> — buttons and links give at least a 24 by 24 pixel target, and the main actions are 44 pixels or larger.</li>
           <li><strong>Zoom and reflow</strong> — the page reflows to a single column and stays usable at 400% zoom or a 320 pixel-wide window, without horizontal scrolling.</li>
           <li><strong>Text spacing</strong> — content remains readable when you increase line height, letter spacing or word spacing in your browser.</li>
