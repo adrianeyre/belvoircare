@@ -329,8 +329,10 @@
 
   function openModal(overlay) {
     if (!overlay || openDialog === overlay) return;
+    // Switching straight from one dialog to another (e.g. Terms -> Privacy)
+    // keeps the original trigger, so closing still returns focus to the page.
     if (openDialog) closeModal(true);
-    lastFocused = document.activeElement;
+    else lastFocused = document.activeElement;
     openDialog = overlay;
     overlay.hidden = false;
     // force reflow so the transition runs from the hidden state

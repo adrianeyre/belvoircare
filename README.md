@@ -18,13 +18,16 @@ event medical cover across the UK since 2012.
   strips, carousel arrows at all widths so nothing needs dragging, 24px+ targets, reflow to 320px,
   form errors wired to their fields and announced, and focus-trapped dialogs that restore focus.
   The footer's **Accessibility** link opens the accessibility statement.
+- **Legal pages as dialogs** — the footer opens the Privacy Policy, Terms & Conditions, Cookie
+  Policy and Accessibility statement. Dialogs can link to one another; focus still returns to the
+  original trigger when the last one closes.
 - **No build step / no dependencies** — plain HTML, CSS and vanilla JS. Fonts from Google Fonts.
 - The contact form composes a pre-filled email to `events@belvoircare.com` (no backend required).
 
 ## Structure
 
 ```
-index.html          # markup + content + SEO/structured data + cookie/accessibility dialogs
+index.html          # markup + content + SEO/structured data + legal/accessibility dialogs
 assets/
   styles.css        # design tokens, theming, layout, animations
   script.js         # theme, nav, scroll reveal, counters, scrollspy, form, dialogs, carousels
